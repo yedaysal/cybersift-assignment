@@ -42,3 +42,8 @@ output "eip_id" {
   description = "ID of the created eip"
   value = aws_eip.cybersift.id
 }
+
+output "instance_public_ip" {
+  description = "Public ip of the created instance"
+  value = aws_instance.cybersift.public_ip
+}
