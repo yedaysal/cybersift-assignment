@@ -37,3 +37,8 @@ output "instance_id" {
   description = "ID of the created instance"
   value = aws_instance.cybersift.id
 }
+
+output "eip_id" {
+  description = "ID of the created eip"
+  value = aws_eip.cybersift.id
+}
