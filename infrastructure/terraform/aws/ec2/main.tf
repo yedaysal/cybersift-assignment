@@ -74,3 +74,13 @@ resource "aws_default_security_group" "cybersift" {
     Name = "cybersift-security-group"
   }
 }
+
+resource "aws_network_interface" "cybersift" {
+  subnet_id = aws_subnet.cybersift.id
+  private_ips = ["172.16.10.100"]
+  security_groups = [ "${aws_default_security_group.cybersift.id}" ]
+
+  tags = {
+    Name = "cybersift-instance-primary-nic"
+  }
+}
