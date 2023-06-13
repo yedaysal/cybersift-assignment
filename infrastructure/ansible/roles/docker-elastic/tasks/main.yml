@@ -1,0 +1,53 @@
+---
+# tasks file for docker-elastic
+
+# REFS:
+# - https://github.com/angristan/ansible-docker
+
+- name: Ensure apt package repository is updated
+  ansible.builtin.command: apt update
+
+- name: Ensure python3-pip is installed
+  ansible.builtin.apt:
+    name: python3-pip
+    state: present
+
+- name: Ensure python docker and docker-compose modules are installed
+  ansible.builtin.pip:
+    name:
+      - docker
+      - docker-compose
+
+- name: Ensure Docker APT key is present
+  ansible.builtin.apt_key:
+    url: https://download.docker.com/linux/debian/gpg
+    state: present
+
+- name: Ensure Docker APT repo is configured
+  ansible.builtin.apt_repository:
+    repo: 'deb [arch=amd64] https://download.docker.com/linux/debian bullseye stable'
+    state: present
+    filename: docker
+
+- name: Ensure Docker is installed
+  ansible.builtin.apt:
+    update_cache: yes
+    cache_valid_time: 86400         # one day
+    name: 
+      - docker
+      - docker-compose
+
+- name: Ensure stack directory (docker-elk) exists on the target server
+  ansible.builtin.copy:
+    src: "{{ role_path }}/files/docker-elk"
+    dest: "{{ stack_path }}"
+
+- name: Ensure docker-elk/setup/entrypoint.sh file is executable
+  ansible.builtin.file:
+    path: "{{ stack_path }}/docker-elk/setup/entrypoint.sh"
+    mode: 0754
+
+- name: Ensure the stack is up
+  ansible.builtin.shell: "docker-compose up setup ; docker-compose up -d"
+  args:
+    chdir: "{{ stack_path }}/docker-elk"
