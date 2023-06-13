@@ -99,6 +99,8 @@ resource "aws_instance" "cybersift" {
     device_index = 0
   }
 
+  key_name = aws_key_pair.cybersift.key_name
+
   tags = {
     Name = "cybersift"
   }
