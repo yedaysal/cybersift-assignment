@@ -17,3 +17,8 @@ output "igw_id" {
   description = "ID of the create igw"
   value = aws_internet_gateway.cybersift.id
 }
+
+output "route_table_id" {
+  description = "ID of the cybersift-vpc default route table"
+  value = aws_default_route_table.cybersift.id
+}
