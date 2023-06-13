@@ -36,3 +36,41 @@ resource "aws_default_route_table" "cybersift" {
     Name = "cybersift-vpc-route-table"
   }
 }
+
+resource "aws_default_security_group" "cybersift" {
+  vpc_id = aws_vpc.cybersift.id
+
+  ingress {
+    protocol = -1
+    self = true
+    from_port = 0
+    to_port = 0
+  }
+
+  ingress {
+    description = "SSH"
+    from_port = 22
+    to_port = 22
+    protocol = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    description = "Kibana"
+    from_port = 5601
+    to_port = 5601
+    protocol = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port = 0
+    to_port = 0
+    protocol = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "cybersift-security-group"
+  }
+}
