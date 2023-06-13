@@ -1,0 +1,5 @@
+---
+# defaults file for docker-elastic
+
+stack_name: docker-elastic
+stack_path: "/opt/cybersift/{{ stack_name }}"
