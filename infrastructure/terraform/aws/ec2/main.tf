@@ -15,3 +15,11 @@ resource "aws_subnet" "cybersift" {
     Name = "cybersift-subnet"
   }
 }
+
+resource "aws_internet_gateway" "cybersift" {
+  vpc_id = aws_vpc.cybersift.id
+
+  tags = {
+    Name = "cybersift-vpc-internet-gw"
+  }
+}
