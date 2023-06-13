@@ -12,3 +12,8 @@ output "subnet_id" {
   description = "ID of the created subnet"
   value = aws_subnet.cybersift.id
 }
+
+output "igw_id" {
+  description = "ID of the create igw"
+  value = aws_internet_gateway.cybersift.id
+}
