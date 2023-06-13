@@ -5,3 +5,13 @@ resource "aws_vpc" "cybersift" {
     Name = "cybersift-vpc"
   }
 }
+
+resource "aws_subnet" "cybersift" {
+  vpc_id = aws_vpc.cybersift.id
+  cidr_block = "172.16.10.0/24"
+  availability_zone = var.region_a
+    
+  tags = {
+    Name = "cybersift-subnet"
+  }
+}
