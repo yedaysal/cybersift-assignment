@@ -98,3 +98,12 @@ resource "aws_instance" "cybersift" {
     Name = "cybersift"
   }
 }
+
+resource "aws_eip" "cybersift" {
+  instance = aws_instance.cybersift.id
+  domain = "vpc"
+
+  tags = {
+    Name = "cybersift-instance-public-ip"
+  }
+}
