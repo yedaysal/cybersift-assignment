@@ -32,3 +32,8 @@ output "iface_id" {
   description = "ID of the created network interface"
   value = aws_network_interface.cybersift.id
 }
+
+output "instance_id" {
+  description = "ID of the created instance"
+  value = aws_instance.cybersift.id
+}
