@@ -101,7 +101,7 @@ resource "aws_key_pair" "cybersift" {
 
 resource "aws_instance" "cybersift" {
   ami = data.aws_ami.ubuntu.id
-  instance_type = "t2.micro"
+  instance_type = "t2.medium"
   
   network_interface {
     network_interface_id = aws_network_interface.cybersift.id
