@@ -22,3 +22,8 @@ output "route_table_id" {
   description = "ID of the cybersift-vpc default route table"
   value = aws_default_route_table.cybersift.id
 }
+
+output "security_group_id" {
+  description = "ID of the cybersift-vpc default security group"
+  value = aws_default_security_group.cybersift.id
+}
