@@ -27,3 +27,8 @@ output "security_group_id" {
   description = "ID of the cybersift-vpc default security group"
   value = aws_default_security_group.cybersift.id
 }
+
+output "iface_id" {
+  description = "ID of the created network interface"
+  value = aws_network_interface.cybersift.id
+}
