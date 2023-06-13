@@ -23,3 +23,16 @@ resource "aws_internet_gateway" "cybersift" {
     Name = "cybersift-vpc-internet-gw"
   }
 }
+
+resource "aws_default_route_table" "cybersift" {
+  default_route_table_id = aws_vpc.cybersift.default_route_table_id
+
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.cybersift.id
+  }
+
+  tags = {
+    Name = "cybersift-vpc-route-table"
+  }
+}
