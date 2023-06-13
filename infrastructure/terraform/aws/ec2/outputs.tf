@@ -8,3 +8,7 @@ output "vpc_id" {
   value = aws_vpc.cybersift.id
 }
 
+output "subnet_id" {
+  description = "ID of the created subnet"
+  value = aws_subnet.cybersift.id
+}
