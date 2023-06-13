@@ -1,0 +1,5 @@
+---
+- name: Ensure docker-elastic role is installed
+  hosts: cybersift
+  roles:
+    - docker-elastic
