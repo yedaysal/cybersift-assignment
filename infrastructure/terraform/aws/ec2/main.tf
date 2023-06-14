@@ -108,6 +108,11 @@ resource "aws_instance" "cybersift" {
     device_index = 0
   }
 
+  ebs_block_device {
+    device_name = "/dev/sda1"
+    volume_size = 50
+  }
+
   key_name = aws_key_pair.cybersift.key_name
 
   tags = {
