@@ -1,0 +1,17 @@
+---
+# tasks file for docker-nifi
+
+- name: Ensure /opt/cybersift/docker-nifi directory exists
+  ansible.builtin.file:
+    path: "{{ stack_path }}"
+    state: directory
+
+- name: Ensure docker-compose.yml exists on the target server
+  ansible.builtin.copy:
+    src: "{{ role_path }}/files/docker-compose.yml"
+    dest: "{{ stack_path }}"
+
+- name: Ensure the stack is up
+  ansible.builtin.shell: "docker-compose up -d"
+  args:
+    chdir: "{{ stack_path }}"
