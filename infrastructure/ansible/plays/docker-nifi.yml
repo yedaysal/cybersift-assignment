@@ -1,0 +1,5 @@
+---
+- name: Ensure docker-nifi role is installed
+  hosts: cybersift
+  roles:
+    - docker-nifi
