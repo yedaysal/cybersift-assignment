@@ -9,9 +9,9 @@ services:
     environment:
       NIFI_WEB_HTTP_PORT: 8081
     networks:
-      - elk
+      - docker-elk_elk
     restart: unless-stopped
 
 networks:
-  elk:
-    driver: bridge
+  docker-elk_elk:
+    external: true
