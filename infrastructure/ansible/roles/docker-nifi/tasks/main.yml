@@ -15,3 +15,10 @@
   ansible.builtin.shell: "docker-compose up -d"
   args:
     chdir: "{{ stack_path }}"
+
+- name: Ensure rsyslog is configured to send logs to NiFi
+  ansible.builtin.copy:
+    dest: "/etc/rsyslog.d/nifi.conf"
+    content: >
+      *.* action(type="omfwd" target="localhost" port="10514" protocol="udp")
+  notify: Restart rsyslog.service
