@@ -45,7 +45,7 @@
 - name: Ensure docker-elk/setup/entrypoint.sh file is executable
   file:
     path: "{{ stack_path }}/docker-elk/setup/entrypoint.sh"
-    mode: 0754
+    mode: '0754'
 
 - name: Ensure the stack is up
   shell: "docker-compose up setup ; docker-compose up -d"
