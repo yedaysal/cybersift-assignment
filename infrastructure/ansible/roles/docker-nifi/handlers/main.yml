@@ -1,0 +1,7 @@
+---
+# handlers file for docker-nifi
+
+- name: Restart rsyslog.service
+  ansible.builtin.service:
+    name: rsyslog
+    state: restarted
