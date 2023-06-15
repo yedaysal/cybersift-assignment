@@ -5,7 +5,8 @@
 # - https://github.com/angristan/ansible-docker
 
 - name: Ensure apt package repository is updated
-  command: apt update
+  apt:
+    update_cache: true
 
 - name: Ensure python3-pip is installed
   apt:
