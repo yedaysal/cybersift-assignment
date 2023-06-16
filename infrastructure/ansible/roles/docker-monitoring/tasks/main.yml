@@ -43,3 +43,26 @@
     enabled: true
     state: started
 
+- name: Check if InfluxDB datasource exists
+  uri:
+    url: "http://localhost:3000/api/datasources/name/InfluxDB"
+    user: "admin"
+    password: "admin"
+    force_basic_auth: true
+    method: GET
+    status_code: [200, 404]
+  register: datasource_check
+
+- name: Ensure InfluxDB datasource is added
+  grafana_datasource:
+    grafana_url: "http://localhost:3000"
+    grafana_user: "admin"
+    grafana_password: "admin"
+    org_id: "1"
+    name: "InfluxDB"
+    ds_type: "influxdb"
+    access: "proxy"
+    ds_url: "http://influxdb:8086"
+    database: "influx"
+  when: datasource_check.status != 200
+  register: influxdb_ds_result
