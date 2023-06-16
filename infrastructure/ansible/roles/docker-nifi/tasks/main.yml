@@ -6,7 +6,7 @@
     path: "{{ stack_path }}"
     state: directory
 
-- name: Ensure docker-compose.yml exists on the target server
+- name: Ensure stack compose file exists on the target server
   ansible.builtin.copy:
     src: "{{ role_path }}/files/docker-compose.yml"
     dest: "{{ stack_path }}"
