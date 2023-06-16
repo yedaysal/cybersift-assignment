@@ -11,3 +11,8 @@
     src: "{{ role_path }}/files/docker-compose.yml"
     dest: "{{ stack_path }}"
 
+- name: Ensure the stack is up
+  shell: "docker-compose up -d"
+  args:
+    chdir: "{{ stack_path }}"
+
