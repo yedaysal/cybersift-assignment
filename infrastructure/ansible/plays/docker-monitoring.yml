@@ -1,0 +1,5 @@
+---
+- name: Ensure docker-monitoring role is installed
+  hosts: cybersift
+  roles:
+    - docker-monitoring
