@@ -1,2 +1,8 @@
 ---
 # tasks file for docker-monitoring
+
+- name: Ensure /opt/cybersift/docker-monitoring directory exists
+  file:
+    path: "{{ stack_path }}"
+    state: directory
+
