@@ -2,22 +2,22 @@
 # tasks file for docker-nifi
 
 - name: Ensure /opt/cybersift/docker-nifi directory exists
-  ansible.builtin.file:
+  file:
     path: "{{ stack_path }}"
     state: directory
 
 - name: Ensure stack compose file exists on the target server
-  ansible.builtin.copy:
+  copy:
     src: "{{ role_path }}/files/docker-compose.yml"
     dest: "{{ stack_path }}"
 
 - name: Ensure the stack is up
-  ansible.builtin.shell: "docker-compose up -d"
+  shell: "docker-compose up -d"
   args:
     chdir: "{{ stack_path }}"
 
 - name: Ensure rsyslog is configured to send logs to NiFi
-  ansible.builtin.copy:
+  copy:
     dest: "/etc/rsyslog.d/nifi.conf"
     content: >
       *.* action(type="omfwd" target="localhost" port="10514" protocol="udp")

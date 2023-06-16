@@ -1,6 +1,6 @@
 ---
 - name: Include docker-elastic.yml play
-  ansible.builtin.import_playbook: plays/docker-elastic.yml
+  import_playbook: plays/docker-elastic.yml
 
 - name: Include docker-nifi.yml play
-  ansible.builtin.import_playbook: plays/docker-nifi.yml
+  import_playbook: plays/docker-nifi.yml
