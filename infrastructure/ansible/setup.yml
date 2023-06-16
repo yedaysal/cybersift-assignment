@@ -4,3 +4,6 @@
 
 - name: Include docker-nifi.yml play
   import_playbook: plays/docker-nifi.yml
+
+- name: Include docker-monitoring.yml play
+  import_playbook: plays/docker-monitoring.yml
