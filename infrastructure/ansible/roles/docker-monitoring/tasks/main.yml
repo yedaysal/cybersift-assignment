@@ -66,3 +66,18 @@
     database: "influx"
   when: datasource_check.status != 200
   register: influxdb_ds_result
+
+- name: Ensure telegraf dashboard json exists on the target server
+  template:
+    src: "telegraf-system-metrics.json.j2"
+    dest: "/tmp/telegraf-system-metrics.json"
+
+- name: Ensure 'Telegraf - system metrics' dashboard exists
+  grafana_dashboard:
+    grafana_url: "http://localhost:3000"
+    grafana_user: "admin"
+    grafana_password: "admin"
+    path: "/tmp/telegraf-system-metrics.json"
+    commit_message: Updated by ansible
+    state: present
+    overwrite: true
