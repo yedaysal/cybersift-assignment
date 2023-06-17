@@ -1,42 +1,6 @@
 ---
 # tasks file for docker-elastic
 
-# REFS:
-# - https://github.com/angristan/ansible-docker
-
-- name: Ensure apt package repository is updated
-  apt:
-    update_cache: true
-
-- name: Ensure python3-pip is installed
-  apt:
-    name: python3-pip
-    state: present
-
-- name: Ensure python docker and docker-compose modules are installed
-  pip:
-    name:
-      - docker
-      - docker-compose
-
-- name: Ensure Docker APT key is present
-  apt_key:
-    url: https://download.docker.com/linux/debian/gpg
-    state: present
-
-- name: Ensure Docker APT repo is configured
-  apt_repository:
-    repo: 'deb [arch=amd64] https://download.docker.com/linux/debian bullseye stable'
-    state: present
-    filename: docker
-
-- name: Ensure Docker is installed
-  apt:
-    update_cache: true
-    name: 
-      - docker
-      - docker-compose
-
 - name: Ensure stack directory (docker-elk) exists on the target server
   copy:
     src: "{{ role_path }}/files/docker-elk"
