@@ -1,12 +1,3 @@
-resource "aws_s3_bucket" "cybersift" {
-  bucket = "cybersift-terraform-state"
-
-  tags = {
-    Name        = "CyberSift Terraform State"
-    Environment = "Dev"
-  }
-}
-
 resource "aws_vpc" "cybersift" {
   cidr_block = "172.16.0.0/16"
 
