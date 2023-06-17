@@ -1,0 +1,25 @@
+filebeat.inputs:
+- type: filestream
+  id: my-filestream-id
+  enabled: true
+  paths:
+    - /var/log/syslog
+
+filebeat.config.modules:
+  path: ${path.config}/modules.d/*.yml
+  reload.enabled: false
+
+output.file:
+  path: "/tmp/filebeat"
+  filename: filebeat
+  rotate_every_kb: 10
+  number_of_files: 100
+  permissions: 0600
+  #rotate_on_startup: true
+
+processors:
+  - add_host_metadata:
+      when.not.contains.tags: forwarded
+  - add_cloud_metadata: ~
+  - add_docker_metadata: ~
+  - add_kubernetes_metadata: ~
