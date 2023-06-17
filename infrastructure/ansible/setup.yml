@@ -1,4 +1,7 @@
 ---
+- name: Include docker.yml play
+  import_playbook: plays/docker.yml
+
 - name: Include docker-elastic.yml play
   import_playbook: plays/docker-elastic.yml
 
