@@ -22,3 +22,19 @@
     content: >
       *.* action(type="omfwd" target="localhost" port="10514" protocol="udp")
   notify: Restart rsyslog.service
+
+- name: Ensure elastic.co apt key is present
+  apt_key:
+    url: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+    state: present
+
+- name: Ensure elastic.co filebeat repository is configured
+  apt_repository:
+    repo: "deb https://artifacts.elastic.co/packages/oss-8.x/apt stable main"
+    update_cache: true
+    state: present
+
+- name: Ensure filebeat package is installed
+  apt:
+    name: "filebeat=8.8.1"
+    state: present
