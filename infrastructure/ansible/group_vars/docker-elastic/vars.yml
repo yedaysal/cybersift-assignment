@@ -1,0 +1,8 @@
+---
+elasticsearch:
+  host_port: 9200
+  container_port: 9200
+
+kibana:
+  host_port: 5601
+  container_port: 5601
