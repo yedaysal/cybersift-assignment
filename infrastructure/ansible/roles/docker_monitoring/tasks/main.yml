@@ -60,8 +60,8 @@
 - name: Check if Grafana InfluxDB datasource exists
   uri:
     url: "http://localhost:3000/api/datasources/name/InfluxDB"
-    user: "admin"
-    password: "admin"
+    user: "{{ vault.grafana_security.admin_user }}"
+    password: "{{ vault.grafana_security.admin_password }}"
     force_basic_auth: true
     method: GET
     status_code: [200, 404]
@@ -70,8 +70,8 @@
 - name: Ensure Grafana InfluxDB datasource is added
   grafana_datasource:
     grafana_url: "http://localhost:3000"
-    grafana_user: "admin"
-    grafana_password: "admin"
+    grafana_user: "{{ vault.grafana_security.admin_user }}"
+    grafana_password: "{{ vault.grafana_security.admin_password }}"
     org_id: "1"
     name: "InfluxDB"
     ds_type: "influxdb"
@@ -89,8 +89,8 @@
 - name: Ensure 'Telegraf - system metrics' dashboard exists
   grafana_dashboard:
     grafana_url: "http://localhost:3000"
-    grafana_user: "admin"
-    grafana_password: "admin"
+    grafana_user: "{{ vault.grafana_security.admin_user }}"
+    grafana_password: "{{ vault.grafana_security.admin_password }}"
     path: "/tmp/telegraf-system-metrics.json"
     commit_message: Updated by ansible
     state: present
