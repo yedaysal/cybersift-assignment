@@ -46,3 +46,9 @@
     name: 
       - docker
       - docker-compose
+
+- name: Ensure user ubuntu is added to docker group
+  user:
+    name: "ubuntu"
+    group: "docker"
+    append: true
