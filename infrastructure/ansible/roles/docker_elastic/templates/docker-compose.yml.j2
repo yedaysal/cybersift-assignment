@@ -28,8 +28,8 @@ services:
       - ./setup/lib.sh:/lib.sh:ro,Z
       - ./setup/roles:/roles:ro,Z
     environment:
-      ELASTIC_PASSWORD: {{ vault_elastic_password }}
-      KIBANA_SYSTEM_PASSWORD: {{ vault_kibana_system_password }}
+      ELASTIC_PASSWORD: {{ vault.elastic_password }}
+      KIBANA_SYSTEM_PASSWORD: {{ vault.kibana_system_password }}
     networks:
       - elk
     depends_on:
@@ -51,7 +51,7 @@ services:
       # Bootstrap password.
       # Used to initialize the keystore during the initial startup of
       # Elasticsearch. Ignored on subsequent runs.
-      ELASTIC_PASSWORD: {{ vault_elastic_password }}
+      ELASTIC_PASSWORD: {{ vault.elastic_password }}
       # Use single node discovery in order to disable production mode and avoid bootstrap checks.
       # see: https://www.elastic.co/guide/en/elasticsearch/reference/current/bootstrap-checks.html
       discovery.type: single-node
@@ -69,7 +69,7 @@ services:
     ports:
       - {{ kibana.host_port }}:{{ kibana.container_port }}
     environment:
-      KIBANA_SYSTEM_PASSWORD: {{ vault_kibana_system_password }}
+      KIBANA_SYSTEM_PASSWORD: {{ vault.kibana_system_password }}
     networks:
       - elk
     depends_on:
