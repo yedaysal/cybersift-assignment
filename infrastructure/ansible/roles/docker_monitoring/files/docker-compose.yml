@@ -20,10 +20,6 @@ services:
     restart: always
     depends_on:
       - influxdb
-    environment:
-      - GF_SECURITY_ADMIN_USER=admin
-      - GF_SECURITY_ADMIN_PASSWORD=admin
-      - GF_INSTALL_PLUGINS=
     links:
       - influxdb
     ports:
