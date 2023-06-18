@@ -43,6 +43,20 @@
     enabled: true
     state: started
 
+- name: Ensure Grafana admin user password is changed
+  uri:
+    url: "http://localhost:3000/api/user/password"
+    user: "{{ vault.grafana_security.admin_user }}"
+    password: "admin"
+    force_basic_auth: true
+    method: PUT
+    body_format: json
+    body: >
+      {
+        "oldPassword":"admin",
+        "newPassword":"{{ vault.grafana_security.admin_password }}"
+      }
+
 - name: Check if InfluxDB datasource exists
   uri:
     url: "http://localhost:3000/api/datasources/name/InfluxDB"
