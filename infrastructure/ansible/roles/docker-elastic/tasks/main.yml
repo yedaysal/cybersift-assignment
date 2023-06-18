@@ -1,7 +1,7 @@
 ---
 # tasks file for docker-elastic
 
-- name: Ensure stack directory (docker-elk) exists on the target server
+- name: Ensure stack directory (docker-elk) exists
   copy:
     src: "{{ role_path }}/files/docker-elk"
     dest: "{{ stack_path }}"

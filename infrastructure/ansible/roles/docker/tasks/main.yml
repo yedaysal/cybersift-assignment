@@ -24,7 +24,7 @@
       - docker-compose
     state: present
 
-- name: Ensure Docker’s official GPG key is added
+- name: Ensure official Docker GPG key is added
   shell: |
     install -m 0755 -d /etc/apt/keyrings ;
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg ;
@@ -40,7 +40,7 @@
     state: present
     filename: docker
 
-- name: Ensure Docker is installed
+- name: Ensure docker and docker-compose are installed
   apt:
     update_cache: true
     name: 
