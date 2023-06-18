@@ -6,6 +6,11 @@
     src: "{{ role_path }}/files/docker-elk"
     dest: "{{ stack_path }}"
 
+- name: Ensure stack compose file exists
+  template:
+    src: "docker-compose.yml.j2"
+    dest: "{{ stack_path }}/docker-elk/docker-compose.yml"
+
 - name: Ensure docker-elk/setup/entrypoint.sh file is executable
   file:
     path: "{{ stack_path }}/docker-elk/setup/entrypoint.sh"
