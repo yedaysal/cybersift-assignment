@@ -1,0 +1,5 @@
+---
+# defaults file for docker_monitoring
+
+stack_name: docker_monitoring
+stack_path: "/opt/cybersift/{{ stack_name }}"

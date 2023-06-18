@@ -1,0 +1,5 @@
+---
+# defaults file for docker_elastic
+
+stack_name: docker_nifi
+stack_path: "/opt/cybersift/{{ stack_name }}"

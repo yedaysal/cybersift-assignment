@@ -1,0 +1,5 @@
+---
+- name: Ensure docker_elastic role is installed
+  hosts: docker_elastic
+  roles:
+    - docker_elastic

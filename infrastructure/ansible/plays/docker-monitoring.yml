@@ -1,5 +1,0 @@
----
-- name: Ensure docker-monitoring role is installed
-  hosts: docker-monitoring
-  roles:
-    - docker-monitoring

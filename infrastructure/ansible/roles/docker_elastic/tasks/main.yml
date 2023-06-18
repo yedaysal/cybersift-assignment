@@ -1,5 +1,5 @@
 ---
-# tasks file for docker-elastic
+# tasks file for docker_elastic
 
 - name: Ensure stack directory (docker-elk) exists
   copy:

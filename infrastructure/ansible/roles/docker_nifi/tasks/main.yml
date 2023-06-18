@@ -1,7 +1,7 @@
 ---
-# tasks file for docker-nifi
+# tasks file for docker_nifi
 
-- name: Ensure /opt/cybersift/docker-nifi directory exists
+- name: Ensure /opt/cybersift/docker_nifi directory exists
   file:
     path: "{{ stack_path }}"
     state: directory

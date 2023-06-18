@@ -1,5 +1,5 @@
 ---
-# handlers file for docker-nifi
+# handlers file for docker_nifi
 
 - name: Restart rsyslog.service
   service:

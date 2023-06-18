@@ -2,11 +2,11 @@
 - name: Include docker.yml play
   import_playbook: plays/docker.yml
 
-- name: Include docker-elastic.yml play
-  import_playbook: plays/docker-elastic.yml
+- name: Include docker_elastic.yml play
+  import_playbook: plays/docker_elastic.yml
 
-- name: Include docker-nifi.yml play
-  import_playbook: plays/docker-nifi.yml
+- name: Include docker_nifi.yml play
+  import_playbook: plays/docker_nifi.yml
 
-- name: Include docker-monitoring.yml play
-  import_playbook: plays/docker-monitoring.yml
+- name: Include docker_monitoring.yml play
+  import_playbook: plays/docker_monitoring.yml

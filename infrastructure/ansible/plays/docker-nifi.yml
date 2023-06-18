@@ -1,5 +1,0 @@
----
-- name: Ensure docker-nifi role is installed
-  hosts: docker-nifi
-  roles:
-    - docker-nifi
