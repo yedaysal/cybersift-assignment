@@ -1,5 +1,5 @@
 ---
 - name: Ensure docker role is installed
-  hosts: cybersift
+  hosts: docker
   roles:
     - docker
