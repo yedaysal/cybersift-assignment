@@ -1,1 +1,5 @@
+# Ignore .terraform/ directories
 *.terraform/
+
+# Ingore gitignore/ directories
+*gitignore/
