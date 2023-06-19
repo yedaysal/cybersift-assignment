@@ -1,0 +1,4 @@
+---
+telegraf_influxdb_host: "localhost"
+telegraf_influxdb_host_port: 8086
+telegraf_influxdb_database: "influx"
