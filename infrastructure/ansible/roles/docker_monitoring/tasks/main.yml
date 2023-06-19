@@ -78,6 +78,9 @@
     access: "proxy"
     ds_url: "http://influxdb:8086"
     database: "influx"
+    user: "{{ vault.influxdb.admin_user }}"
+    additional_secure_json_data:
+      password: "{{ vault.influxdb.admin_password }}"
   when: datasource_check.status != 200
   register: influxdb_ds_result
 
