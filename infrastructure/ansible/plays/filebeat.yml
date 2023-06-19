@@ -1,0 +1,5 @@
+---
+- name: Ensure filebeat role is installed
+  hosts: filebeat
+  roles:
+    - filebeat
