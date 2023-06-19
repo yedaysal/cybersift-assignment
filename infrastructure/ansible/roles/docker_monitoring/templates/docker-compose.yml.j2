@@ -9,6 +9,7 @@ services:
       - INFLUXDB_DB=influx
       - INFLUXDB_ADMIN_USER={{ vault.influxdb.admin_user }}
       - INFLUXDB_ADMIN_PASSWORD={{ vault.influxdb.admin_password }}
+      - INFLUXDB_HTTP_AUTH_ENABLED=true
     ports:
       - '8086:8086'
     volumes:
