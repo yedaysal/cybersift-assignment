@@ -1,0 +1,6 @@
+---
+nifi_ui_host_port: 8081
+nifi_ui_container_port: 8081
+
+nifi_syslog_host_port: 10514
+nifi_syslog_container_port: 10514/udp
