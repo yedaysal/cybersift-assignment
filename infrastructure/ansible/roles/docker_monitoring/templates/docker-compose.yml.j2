@@ -6,12 +6,12 @@ services:
     container_name: influxdb
     restart: always
     environment:
-      - INFLUXDB_DB=influx
+      - INFLUXDB_DB={{ group_vars.influxdb.db_name }}
       - INFLUXDB_ADMIN_USER={{ vault.influxdb.admin_user }}
       - INFLUXDB_ADMIN_PASSWORD={{ vault.influxdb.admin_password }}
-      - INFLUXDB_HTTP_AUTH_ENABLED=true
+      - INFLUXDB_HTTP_AUTH_ENABLED={{ group_vars.influxdb.http_auth_enabled }}
     ports:
-      - '8086:8086'
+      - "{{ group_vars.influxdb.host_port }}:{{ group_vars.influxdb.container_port }}"
     volumes:
       - influxdb_data:/var/lib/influxdb
 
@@ -24,7 +24,7 @@ services:
     links:
       - influxdb
     ports:
-      - '3000:3000'
+      - "{{ group_vars.grafana.host_port }}:{{ group_vars.grafana.container_port }}"
     volumes:
       - grafana_data:/var/lib/grafana
       
