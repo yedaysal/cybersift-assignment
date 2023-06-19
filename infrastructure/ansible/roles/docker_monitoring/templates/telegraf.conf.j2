@@ -16,8 +16,8 @@
   urls = ["http://localhost:8086"]
   database = "{{ group_vars.influxdb.db_name }}"
   timeout = "5s"
-  username = "{{ group_vars.influxdb.admin_user }}"
-  password = "{{ group_vars.influxdb.admin_password }}"
+  username = "{{ vault.influxdb.admin_user }}"
+  password = "{{ vault.influxdb.admin_password }}"
 
 [[inputs.cpu]]
   percpu = true
