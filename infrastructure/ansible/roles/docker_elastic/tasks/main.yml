@@ -26,7 +26,7 @@
   args:
     chdir: "{{ stack_path }}/docker-elk"
 
-- name: Ensure Kibana UI is available
+- name: Ensure Kibana UI (http://{{ inventory_hostname }}:{{ kibana_host_port }}/) is available
   uri:
     url: "http://localhost:{{ kibana_host_port }}/"
     method: GET
