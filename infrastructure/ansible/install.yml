@@ -11,5 +11,8 @@
 - name: Include filebeat.yml play
   import_playbook: plays/filebeat.yml
 
+- name: Include telegraf.yml play
+  import_playbook: plays/telegraf.yml
+
 - name: Include docker_monitoring.yml play
   import_playbook: plays/docker_monitoring.yml
