@@ -67,7 +67,7 @@
     ds_type: "influxdb"
     access: "proxy"
     ds_url: "http://influxdb:8086"
-    database: "influx"
+    database: "{{ influxdb_db_name }}"
     user: "{{ influxdb_admin_user }}"
     additional_secure_json_data:
       password: "{{ influx_db_admin_password }}"
