@@ -13,11 +13,11 @@
   omit_hostname = false
 
 [[outputs.influxdb]]
-  urls = ["http://localhost:8086"]
-  database = "{{ group_vars.influxdb.db_name }}"
+  urls = ["http://{{ telegraf_influxdb_host }}:{{ telegraf_influxdb_host_port }}"]
+  database = "{{ telegraf_influxdb_database }}"
   timeout = "5s"
-  username = "{{ vault.influxdb.admin_user }}"
-  password = "{{ vault.influxdb.admin_password }}"
+  username = "{{ telegraf_influxdb_admin_user }}"
+  password = "{{ telegraf_influxdb_admin_password }}"
 
 [[inputs.cpu]]
   percpu = true
