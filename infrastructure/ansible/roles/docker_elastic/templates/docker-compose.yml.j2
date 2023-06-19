@@ -44,7 +44,7 @@ services:
       - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro,Z
       - elasticsearch:/usr/share/elasticsearch/data:Z
     ports:
-      - {{ elasticsearch.host_port }}:{{ elasticsearch.container_port }}
+      - "{{ elasticsearch.host_port }}:{{ elasticsearch.container_port }}"
     environment:
       node.name: elasticsearch
       ES_JAVA_OPTS: -Xms512m -Xmx512m
