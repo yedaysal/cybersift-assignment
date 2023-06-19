@@ -1,0 +1,52 @@
+---
+# tasks file for filebeat
+
+- name: Ensure elastic.co apt key is present
+  apt_key:
+    url: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+    state: present
+
+- name: Ensure elastic.co filebeat repository is configured
+  apt_repository:
+    repo: "deb https://artifacts.elastic.co/packages/oss-8.x/apt stable main"
+    update_cache: true
+    state: present
+
+- name: Ensure filebeat package is installed
+  apt:
+    name: "filebeat=8.8.1"
+    state: present
+
+- name: Ensure filebeat.yml is present
+  template:
+    src: filebeat.yml.j2
+    dest: /etc/filebeat/filebeat.yml
+    owner: "root"
+    group: "root"
+    mode: '0644'
+  notify: Restart filebeat.service
+
+- name: Ensure filebeat service is enabled and started
+  service:
+    name: filebeat
+    enabled: true
+    state: started
+
+- name: Ensure filebeat output directory exists and is accessible
+  file:
+    path: "/tmp/filebeat"
+    owner: "root"
+    group: "root"
+    mode: '0755'
+    state: directory
+
+- name: Ensure "* * * * * chmod 604 /tmp/filebeat/*" cron entry is present
+  cron:
+    name: Give read permission to others for files under /tmp/filebeat/
+    minute: "*"
+    hour: "*"
+    day: "*"
+    month: "*"
+    weekday: "*"
+    job: "chmod 604 /tmp/filebeat/*"
+

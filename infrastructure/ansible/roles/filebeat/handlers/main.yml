@@ -1,0 +1,7 @@
+---
+# handlers file for filebeat
+
+- name: Restart filebeat.service
+  service:
+    name: filebeat
+    state: restarted
