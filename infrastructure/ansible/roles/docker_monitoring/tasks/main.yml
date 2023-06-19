@@ -28,10 +28,10 @@
     name: telegraf
     state: present
 
-- name: Ensure telegraf.conf is copied
-  copy:
-    src: "{{ role_path }}/files/telegraf.conf"
-    dest: "/etc/telegraf/"
+- name: Ensure telegraf.conf exists
+  template:
+    src: "telegraf.conf.j2"
+    dest: "/etc/telegraf/telegraf.conf"
     owner: root
     group: root
     mode: '0644'
