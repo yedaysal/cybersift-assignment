@@ -4,7 +4,7 @@ services:
   influxdb:
     image: influxdb:1.8-alpine
     container_name: influxdb
-    restart: always
+    restart: unless-stopped
     environment:
       - INFLUXDB_DB={{ group_vars.influxdb.db_name }}
       - INFLUXDB_ADMIN_USER={{ vault.influxdb.admin_user }}
@@ -18,7 +18,7 @@ services:
   grafana:
     image: grafana/grafana
     container_name: grafana-server
-    restart: always
+    restart: unless-stopped
     depends_on:
       - influxdb
     links:
