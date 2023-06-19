@@ -8,13 +8,13 @@
 
 - name: Ensure elastic.co filebeat repository is configured
   apt_repository:
-    repo: "deb https://artifacts.elastic.co/packages/oss-8.x/apt stable main"
+    repo: "deb https://artifacts.elastic.co/packages/{{ filebeat_version }}/apt stable main"
     update_cache: true
     state: present
 
 - name: Ensure filebeat package is installed
   apt:
-    name: "filebeat=8.8.1"
+    name: "filebeat={{ elastic_version }}"
     state: present
 
 - name: Ensure filebeat.yml is present
