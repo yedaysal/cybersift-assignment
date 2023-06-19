@@ -1,0 +1,5 @@
+---
+- name: Ensure telegraf role is installed
+  hosts: telegraf
+  roles:
+    - telegraf
