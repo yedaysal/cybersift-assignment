@@ -1,0 +1,11 @@
+---
+group_vars:
+  influxdb:
+    db_name: influx
+    host_port: 8086
+    container_port: 8086
+    http_auth_enable: true
+  grafana:
+    host_port: 3000
+    container_port: 3000
+  
