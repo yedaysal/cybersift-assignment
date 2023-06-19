@@ -7,9 +7,9 @@
     state: directory
 
 - name: Ensure stack compose file exists on the target server
-  copy:
-    src: "{{ role_path }}/files/docker-compose.yml"
-    dest: "{{ stack_path }}"
+  template:
+    src: "docker-compose.yml.j2"
+    dest: "{{ stack_path }}/docker-compose.yml"
 
 - name: Ensure the stack is up
   shell: "docker-compose up -d"
