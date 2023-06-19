@@ -8,5 +8,8 @@
 - name: Include docker_nifi.yml play
   import_playbook: plays/docker_nifi.yml
 
+- name: Include filebeat.yml play
+  import_playbook: plays/filebeat.yml
+
 - name: Include docker_monitoring.yml play
   import_playbook: plays/docker_monitoring.yml
