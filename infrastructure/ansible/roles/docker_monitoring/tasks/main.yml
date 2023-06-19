@@ -16,6 +16,17 @@
   args:
     chdir: "{{ stack_path }}"
 
+- name: Ensure Grafana UI (http://{{ inventory_hostname }}:{{ grafana_host_port }}/) is available
+  uri:
+    url: "http://localhost:{{ grafana_host_port }}/"
+    method: GET
+    status_code:
+      - 200
+  register: uri_output
+  until: uri_output.status == 200
+  retries: 12 # Retries for 12 * 5 seconds = 60 seconds
+  delay: 5 # Retry every 5 seconds
+
 - name: Ensure Grafana admin user password is changed
   uri:
     url: "http://{{ grafana_host }}:{{ grafana_host_port }}/api/user/password"
