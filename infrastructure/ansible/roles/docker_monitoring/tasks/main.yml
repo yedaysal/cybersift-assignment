@@ -29,6 +29,12 @@
         "oldPassword":"admin",
         "newPassword":"{{ vault.grafana_security.admin_password }}"
       }
+    status_code:
+      - 200
+  register: uri_output
+  until: uri_output.status == 200
+  retries: 12 # Retries for 12 * 5 seconds = 60 seconds
+  delay: 5 # Retry every 5 seconds
 
 - name: Check if Grafana InfluxDB datasource exists
   uri:
