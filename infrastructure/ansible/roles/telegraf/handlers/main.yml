@@ -1,5 +1,5 @@
 ---
-# handlers file for docker_monitoring
+# handlers file for telegraf
 
 - name: Restart telegraf
   service:

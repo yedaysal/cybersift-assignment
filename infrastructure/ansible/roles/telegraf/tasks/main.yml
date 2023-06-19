@@ -1,0 +1,30 @@
+---
+# tasks file for telegraf
+
+- name: Ensure Telegraf repository is installed
+  shell: wget -q https://repos.influxdata.com/influxdata-archive_compat.key ; echo '393e8779c89ac8d958f81f942f9ad7fb82a25e133faddaf92e15b16e6ac9ce4c influxdata-archive_compat.key' | sha256sum -c && cat influxdata-archive_compat.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/influxdata-archive_compat.gpg > /dev/null ; echo 'deb [signed-by=/etc/apt/trusted.gpg.d/influxdata-archive_compat.gpg] https://repos.influxdata.com/debian stable main' | sudo tee /etc/apt/sources.list.d/influxdata.list
+
+- name: Ensure apt cache is updated
+  apt:
+    update_cache: yes
+
+- name: Ensure Telegraf is installed
+  apt:
+    name: telegraf
+    state: present
+
+- name: Ensure telegraf.conf exists
+  template:
+    src: "telegraf.conf.j2"
+    dest: "/etc/telegraf/telegraf.conf"
+    owner: root
+    group: root
+    mode: '0644'
+  notify: Restart telegraf
+
+- name: Ensure Telegraf service is enabled and started
+  service:
+    name: telegraf
+    enabled: true
+    state: started
+
