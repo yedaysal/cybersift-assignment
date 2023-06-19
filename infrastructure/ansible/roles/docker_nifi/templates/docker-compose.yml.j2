@@ -4,12 +4,12 @@ services:
   nifi:
     image: apache/nifi:latest
     ports:
-      - "8081:8081"
-      - "10514:10514/udp"
+      - "{{ nifi_ui_host_port }}:{{ nifi_ui_container_port }}"
+      - "{{ nifi_syslog_host_port }}:{{ nifi_syslog_container_port }}"
     volumes:
       - /tmp/filebeat:/tmp/filebeat
     environment:
-      NIFI_WEB_HTTP_PORT: 8081
+      NIFI_WEB_HTTP_PORT: {{ nifi_ui_container_port }}
     networks:
       - docker-elk_elk
     restart: unless-stopped
