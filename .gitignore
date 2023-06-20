@@ -3,3 +3,6 @@
 
 # Ingore gitignore/ directories
 *gitignore/
+
+# Ignore .vscode/ directories
+*.vscode/
