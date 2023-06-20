@@ -31,5 +31,5 @@
   copy:
     dest: "/etc/rsyslog.d/nifi.conf"
     content: >
-      *.* action(type="omfwd" target="localhost" port="10514" protocol="udp")
+      *.* action(type="omfwd" target="{{ nifi_host }}" port="{{ nifi_syslog_host_port }}" protocol="udp")
   notify: Restart rsyslog.service
