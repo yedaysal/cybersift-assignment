@@ -14,6 +14,8 @@ services:
       - "{{ influxdb_host_port }}:{{ influxdb_container_port }}"
     volumes:
       - influxdb_data:/var/lib/influxdb
+    networks:
+      - docker_elastic
 
   grafana:
     image: grafana/grafana
@@ -27,7 +29,13 @@ services:
       - "{{ grafana_host_port }}:{{ grafana_container_port }}"
     volumes:
       - grafana_data:/var/lib/grafana
+    networks:
+      - docker_elastic
       
+networks:
+  docker_elastic:
+    external: true
+
 volumes:
   grafana_data: {}
   influxdb_data: {}

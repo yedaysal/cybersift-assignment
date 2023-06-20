@@ -11,9 +11,9 @@ services:
     environment:
       NIFI_WEB_HTTP_PORT: {{ nifi_ui_container_port }}
     networks:
-      - docker-elk_elk
+      - docker_elastic
     restart: unless-stopped
 
 networks:
-  docker-elk_elk:
+  docker_elastic:
     external: true
