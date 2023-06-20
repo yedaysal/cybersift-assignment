@@ -52,3 +52,8 @@
     name: "ubuntu"
     groups: "docker"
     append: true
+
+- name: Ensure docker_elastic network is created
+  docker_network:
+    name: docker_elastic
+    driver: bridge
