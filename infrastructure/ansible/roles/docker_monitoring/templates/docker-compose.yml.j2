@@ -3,7 +3,6 @@ version: '3.7'
 services:
   influxdb:
     image: influxdb:1.8-alpine
-    restart: unless-stopped
     environment:
       - INFLUXDB_DB={{ influxdb_db_name }}
       - INFLUXDB_ADMIN_USER={{ influxdb_admin_user }}
@@ -15,20 +14,21 @@ services:
       - influxdb_data:/var/lib/influxdb
     networks:
       - docker_elastic
+    restart: unless-stopped
 
   grafana:
     image: grafana/grafana
-    restart: unless-stopped
-    depends_on:
-      - influxdb
-    links:
-      - influxdb
     ports:
       - "{{ grafana_host_port }}:{{ grafana_container_port }}"
     volumes:
       - grafana_data:/var/lib/grafana
+    depends_on:
+      - influxdb
+    links:
+      - influxdb
     networks:
       - docker_elastic
+    restart: unless-stopped
       
 networks:
   docker_elastic:

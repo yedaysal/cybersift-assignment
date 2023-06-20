@@ -3,13 +3,13 @@ version: '3.7'
 services:
   nifi:
     image: apache/nifi:latest
+    environment:
+      NIFI_WEB_HTTP_PORT: {{ nifi_ui_container_port }}
     ports:
       - "{{ nifi_ui_host_port }}:{{ nifi_ui_container_port }}"
       - "{{ nifi_syslog_host_port }}:{{ nifi_syslog_container_port }}"
     volumes:
       - /tmp/filebeat:/tmp/filebeat
-    environment:
-      NIFI_WEB_HTTP_PORT: {{ nifi_ui_container_port }}
     networks:
       - docker_elastic
     restart: unless-stopped
