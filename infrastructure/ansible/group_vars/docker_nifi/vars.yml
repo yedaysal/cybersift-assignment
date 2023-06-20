@@ -1,4 +1,5 @@
 ---
+nifi_host: "localhost"
 nifi_ui_host_port: 8081
 nifi_ui_container_port: 8081
 
