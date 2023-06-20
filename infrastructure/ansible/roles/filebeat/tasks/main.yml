@@ -37,7 +37,7 @@
     path: "/tmp/filebeat"
     owner: "root"
     group: "root"
-    mode: '0755'
+    mode: '0777'
     state: directory
 
 - name: Ensure "* * * * * chmod 604 /tmp/filebeat/*" cron entry is present
