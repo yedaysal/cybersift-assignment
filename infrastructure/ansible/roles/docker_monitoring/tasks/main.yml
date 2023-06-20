@@ -6,7 +6,7 @@
     path: "{{ stack_path }}"
     state: directory
 
-- name: Ensure stack compose file exists on the target server
+- name: Ensure stack compose file exists
   template:
     src: "docker-compose.yml.j2"
     dest: "{{ stack_path }}/docker-compose.yml"
