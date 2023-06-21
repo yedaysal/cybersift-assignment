@@ -4,7 +4,7 @@ This document:
 
 - Provides basic information about Terraform
 - Explains the details of the Terraform modules created to build the environment
-- Provides system requirements information
+- Provides environment requirements information
 - Guidelines to perform environment setup
 
 ## Table of Contents
