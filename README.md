@@ -11,8 +11,8 @@ Repository that contains the code to setup the necessary environment and softwar
   - [Environment Technologies](#environment-technologies)
   - [Software Infrastructure Technologies](#software-infrastructure-technologies)
 - [Environment and Software Infrastructure Setup](#environment-and-software-infrastructure-setup)
-  - [Environment Setup]()
-  - [Software Infrastructure Setup]()
+  - [Environment Setup](#environment-setup)
+  - [Software Infrastructure Setup](#software-infrastructure-setup)
 
 ## Introduction - The Project's Aim
 
@@ -64,8 +64,8 @@ The environment of the project has been designed to be created in the cloud (AWS
 
 It's already been mentioned about the components which bring up the software infrastructure in the  [Software Infrastructure Technologies](#software-infrastructure-technologies) section. These components form three main application stacks by coming together:
 
-1. **Elastic Stack**, which is the storage and observability center of the collected log data. 
+1. **Elastic Stack**, which is the storage and observability center of the collected log data.
 2. **NiFi Stack**, which is the collector, transformer and shipper of log data.
 3. **Monitoring Stack**, which is the gatherer, storekeeper and visualizer of the collected metric data of the host operating system.
 
-For more information and to get started, follow [**this**](./infrastructure/ansible/README.md) link.
+For more information and to get started with setup process, follow [**this**](./infrastructure/ansible/README.md) link.
