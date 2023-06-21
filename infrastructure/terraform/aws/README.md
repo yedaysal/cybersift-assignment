@@ -160,7 +160,7 @@ To create the necessary network and virtualization infrastructure on Amazon EC2 
 cd cybersift/infrastructure/terraform/aws/ec2
 ```
 
-2. Change the `profile` variable's value to the profile name defined in the [AWS Configuration](#aws-configuration) section in the `provider.tf` file.
+2. Change the `profile` variable's value to the profile name defined in the [AWS Configuration](#aws-configuration) section in the `variables.tf` file.
 3. Change the `public_key` variable's value to current user's public SSH key files (`id_rsa.pub`) content in the `variables.tf` file to place the current user's public ssh key to the `authorized_keys` file of default user (**ubuntu**) of the application server to be created. This will allow the current user to SSH into application server without passowrd. 
 4. Change the `profile` attribute's value to the profile name defined in the [AWS Configuration](#aws-configuration) section in the `backend.tf` file.
 5. Initialize the current working directory, which contains the Terraform configuration files, with `terraform init`command:
