@@ -9,6 +9,6 @@ variable "region_a" {
 }
 
 variable "profile" {
-  type = string
+  type    = string
   default = "AWS_CONFIG_PROFILE_NAME"
 }
