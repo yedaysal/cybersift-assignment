@@ -74,7 +74,7 @@ In order to setup a healthy computing environment, 2 virtual machines (**Control
 
 Before proceeding to next section:
 
-- Set up a controller server with the specifications in Table-1, and install all software listed in Table-3.
+- Set up a controller server with the specifications in Table-1, and ensure that  all software listed in Table-3 are installed.
 - Make sure that the controller server has access to the Internet.
 - On the controller node, create a passwordless ssh key pair.
 
@@ -126,7 +126,7 @@ git clone https://github.com/yedaysal/cybersift.git
 cd cybersift/infrastructure/terraform/aws/s3
 ```
 
-3. Change the `profile` variable's value to the profile name defined in the [AWS Configuration](#aws-configuration) section in the `provider.tf` file.
+3. Change the `profile` variable's value to the profile name defined in the [AWS Configuration](#aws-configuration) section in the `variables.tf` file.
 
 4. Initialize the current working directory, which contains the Terraform configuration files, with `terraform init`command:
 
