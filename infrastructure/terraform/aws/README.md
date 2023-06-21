@@ -130,7 +130,7 @@ cd cybersift/infrastructure/terraform/aws/s3
 
 4. Initialize the current working directory, which contains the Terraform configuration files, with `terraform init`command:
 
-```consle
+```console
 terraform init
 ```
 
@@ -165,7 +165,7 @@ cd cybersift/infrastructure/terraform/aws/ec2
 4. Change the `profile` attribute's value to the profile name defined in the [AWS Configuration](#aws-configuration) section in the `backend.tf` file.
 5. Initialize the current working directory, which contains the Terraform configuration files, with `terraform init`command:
 
-```consle
+```console
 terraform init
 ```
 
@@ -179,6 +179,12 @@ terraform plan
 
 ```console
 terraform apply
+```
+
+8. Capture the public IP address of the application server created from the `terraform apply` command output and append the following entry to the `/etc/hosts` file to access the application server with the domain name `cybersift`:
+
+```
+APP_SERVER_PUBLIC_IP_ADDR cybersift
 ```
 
 <br>
