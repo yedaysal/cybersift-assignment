@@ -8,6 +8,11 @@ variable "region_a" {
   default = "eu-central-1a"
 }
 
+variable "profile" {
+  type    = string
+  default = "AWS_CONFIG_PROFILE_NAME"
+}
+
 variable "public_key" {
   type    = string
   default = "SSH_PUBLIC_KEY"
