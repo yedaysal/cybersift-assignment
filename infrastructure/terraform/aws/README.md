@@ -165,10 +165,10 @@ If there is no error in the `terraform apply` output, that means the requested b
 
 <br>
 
->
->**Tip:** To remove created resources, use `terraform destroy` command.
->
->**Warning:** Be careful while using the `terraform destroy` command since it destroys all infrastructure created.
+> **Note**
+> To remove created resources, use `terraform destroy` command.
+> **Warning**
+> Be careful while using the `terraform destroy` command since it destroys all infrastructure created.
 
 ### Amazon EC2 and VPC Resource Setup
 
@@ -211,9 +211,11 @@ ssh ubuntu@APP_SRV_PUB_DNS_HOSTNAME
 
 <br>
 
->
->**Tip:** To remove created resources, use `terraform destroy` command.
->
->**Warning:** Be careful while using the `terraform destroy` command since it destroys all infrastructure created.
+> **Note**
+> To remove created resources, use `terraform destroy` command.
+> **Warning**
+> Be careful while using the `terraform destroy` command since it destroys all infrastructure created.
+
+After this point, it can be proceeded with the [*Software Infrastructure Setup*](../../ansible/README.md).
 
 ## Resources
