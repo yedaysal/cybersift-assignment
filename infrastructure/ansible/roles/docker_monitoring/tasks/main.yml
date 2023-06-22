@@ -84,17 +84,14 @@
   when: datasource_check.status != 200
   register: influxdb_ds_result
 
-- name: Ensure telegraf dashboard json exists on the target server
-  template:
-    src: "telegraf-system-metrics.json.j2"
-    dest: "/tmp/telegraf-system-metrics.json"
-
 - name: Ensure 'Telegraf - system metrics' dashboard exists
-  grafana_dashboard:
-    grafana_url: "http://{{ grafana_host }}:{{ grafana_host_port }}"
-    grafana_user: "{{ grafana_security_admin_user }}"
-    grafana_password: "{{ grafana_security_admin_password }}"
-    path: "/tmp/telegraf-system-metrics.json"
-    commit_message: Updated by ansible
-    state: present
-    overwrite: true
+  uri:
+    url: "http://{{ grafana_host }}:{{ grafana_host_port }}/api/dashboards/db"
+    user: "{{ grafana_security_admin_user }}"
+    password: "{{ grafana_security_admin_password }}"
+    force_basic_auth: true
+    method: POST
+    body_format: json
+    body: "{{ lookup('template', 'telegraf-system-metrics.json.j2') }}"
+    status_code:
+      - 200
