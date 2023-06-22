@@ -118,3 +118,38 @@ After the installation 3 important WEB-GUIs become available:
 | Grafana UI | [http://APP_SRV_PUB_DNS_HOSTNAME:3000/](http://APP_SRV_PUB_DNS_HOSTNAME:3000) | admin | ?dPxPzvV%@U6vcks |
 
 ## Resources
+
+- [Apache NiFi: From Syslog to Elasticsearch](https://blog.davidvassallo.me/2018/09/19/apache-nifi-from-syslog-to-elasticsearch/)
+- [Apache NiFi Overview](https://nifi.apache.org/docs.html)
+- [Relaying Syslog UDP Events with Apache NiFi](https://exceptionfactory.com/posts/2022/09/26/relaying-syslog-udp-events-with-apache-nifi/)
+- [Apache NiFi - The request contained an invalid host header](https://stackoverflow.com/questions/48771728/apache-nifi-the-request-contained-an-invalid-host-header)
+- [Security Configuration](https://nifi.apache.org/docs/nifi-docs/html/administration-guide.html#single_user_identity_provider)
+- [community.grafana.grafana_datasource module – Manage Grafana datasources](https://docs.ansible.com/ansible/latest/collections/community/grafana/grafana_datasource_module.html)
+- [Controlling where tasks run: delegation and local actions](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_delegation.html)
+- [Use a pre-existing network](https://docs.docker.com/compose/networking/#use-a-pre-existing-network)
+- [docker_container – manage docker containers
+](https://docs.ansible.com/ansible/2.9/modules/docker_container_module.html)
+- [Loops](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_loops.html#loops)
+- [Roles](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_reuse_roles.html#using-role-dependencies)
+- [Install Telegraf](https://docs.influxdata.com/telegraf/v1.21/introduction/installation/)
+- [Wait for a couple of minutes to check if an URL is responding](https://stackoverflow.com/questions/72363095/wait-for-a-couple-of-minutes-to-check-if-an-url-is-responding)
+- [Shell script - remove first and last quote (") from a variable](https://stackoverflow.com/questions/9733338/shell-script-remove-first-and-last-quote-from-a-variable)
+- [Sending Messages to a Remote Syslog Server](https://www.rsyslog.com/sending-messages-to-a-remote-syslog-server/)
+- [Configuring Remote Logging using rsyslog in CentOS/RHEL
+](https://www.thegeekdiary.com/configuring-remote-logging-using-rsyslog-in-centos-rhel/)
+- [How To Send Linux Logs to a Remote Server](https://linuxhint.com/send_linux_logs_remote_server/)
+- [How to delete from a text file, all lines that contain a specific string?](https://stackoverflow.com/questions/5410757/how-to-delete-from-a-text-file-all-lines-that-contain-a-specific-string)
+- [Set up Telegraf, InfluxDB and Grafana with Docker Compose](https://sweetcode.io/set-up-telegraf-influxdb-and-grafana-with-docker-compose/)
+- [Telegraf - system metrics](https://grafana.com/grafana/dashboards/5955-telegraf-system-metrics/)
+- [How to Install Grafana TIG stack Ubuntu](https://www.turbogeek.co.uk/grafana-ubuntu-tig-stack/)
+- [community.grafana.grafana_dashboard module – Manage Grafana dashboards](https://docs.ansible.com/ansible/latest/collections/community/grafana/grafana_dashboard_module.html)
+- [ansible.builtin.stat module – Retrieve file or file system status](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/stat_module.html)
+- [Set default umask of 0027 for all Beats-created files](https://github.com/elastic/beats/pull/14119/commits)
+- [Nifi SplitJson - how to split json array to individual recods?](https://community.cloudera.com/t5/Support-Questions/Nifi-SplitJson-how-to-split-json-array-to-individual-recods/m-p/210624)
+- [Configure the File output](https://www.elastic.co/guide/en/beats/filebeat/current/file-output.html)
+- [Shell scripting: -z and -n options with if](https://unix.stackexchange.com/questions/109625/shell-scripting-z-and-n-options-with-if)
+- [ansible.builtin.wait_for module – Waits for a condition before continuing](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/wait_for_module.html)
+- [docker_network – Manage Docker networks](https://docs.ansible.com/ansible/2.9/modules/docker_network_module.html)
+- [How to write a good README for your GitHub project?](https://bulldogjob.com/readme/how-to-write-a-good-readme-for-your-github-project)
+- [Readme Best Practices](https://github.com/jehna/readme-best-practices)
+- [Ansible (software)](https://en.wikipedia.org/wiki/Ansible_(software))

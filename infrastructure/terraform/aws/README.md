@@ -221,3 +221,15 @@ ssh ubuntu@APP_SRV_PUB_DNS_HOSTNAME
 After this point, it can be proceeded with the [*Software Infrastructure Setup*](../../ansible/README.md).
 
 ## Resources
+
+- [Add or remove a public key on your instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/replacing-key-pair.html)
+- [Amazon EC2 instance IP addressing](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-instance-addressing.html)
+- [Resource: aws_ebs_volume](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ebs_volume)
+- [Resource: aws_instance](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance#key_name)
+- [Resource: aws_key_pair](https://registry.terraform.io/providers/hashicorp/aws/3.9.0/docs/resources/key_pair)
+- [Resource: aws_s3_bucket](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket)
+- [An IP address of EC2 instance gets changed after the restart](https://stackoverflow.com/questions/55414302/an-ip-address-of-ec2-instance-gets-changed-after-the-restart#:~:text=Actually%2C%20When%20you%20stop%2Fstart,used%20by%20other%20EC2%20instances.)
+- [aws_instance - changing volume_size](https://stackoverflow.com/questions/67210801/aws-instance-changing-volume-size)
+- [Set up to connect to your instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/connection-prereqs.html)
+- [Output Data from Terraform](https://developer.hashicorp.com/terraform/tutorials/configuration-language/outputs)
+- [Terraform | Create AWS EC2 instance with key-pair](https://awstip.com/terraform-create-aws-ec2-instance-with-key-pair-ff541f9eec58)
