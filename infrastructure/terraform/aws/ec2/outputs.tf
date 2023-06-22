@@ -47,3 +47,8 @@ output "instance_public_ip" {
   description = "Public ip of the created instance"
   value = aws_eip.cybersift.public_ip
 }
+
+output "instance_public_dns_hostname" {
+  description = "Public DNS hostname of the created instance"
+  value = aws_eip.cybersift.public_dns
+}
