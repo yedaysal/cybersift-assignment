@@ -187,8 +187,10 @@ terraform apply
 APP_SERVER_PUBLIC_IP_ADDR cybersift
 ```
 
-<br>
+9. If there is no error in the `terraform apply` output, the application server should be up and ready, and accessible via SSH without providing any password:
 
-If there is no error in the `terraform apply` output, that means the requested VPC resources (vpc, subnet, internet gateway, firewall rules, network interface, etc.) and EC2 resources (application server, key pair, etc.) are created.
+```console
+ssh ubuntu@cybersift
+```
 
 ## Resources
