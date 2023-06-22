@@ -153,7 +153,7 @@ terraform init
 terraform plan
 ```
 
-6. To execute the actions proposed in the Terraform plan, run the `terraform apply`command and provide `yes` input when prompted:
+6. To execute the actions proposed in the Terraform plan, run the `terraform apply`command and provide `yes` input when prompted (or use `terraform apply -auto-approve` instead of `terraform apply`):
 
 ```console
 terraform apply
@@ -162,6 +162,13 @@ terraform apply
 <br>
 
 If there is no error in the `terraform apply` output, that means the requested bucket is created.
+
+<br>
+
+>
+>**Tip:** To remove created resources, use `terraform destroy` command.
+>
+>**Warning:** Be careful while using the `terraform destroy` command since it destroys all infrastructure created.
 
 ### Amazon EC2 and VPC Resource Setup
 
@@ -188,7 +195,7 @@ terraform init
 terraform plan
 ```
 
-7. To execute the actions proposed in the Terraform plan, run the `terraform apply`command and provide `yes` input when prompted:
+7. To execute the actions proposed in the Terraform plan, run the `terraform apply`command and provide `yes` input when prompted (or use `terraform apply -auto-approve` instead of `terraform apply`):
 
 ```console
 terraform apply
@@ -201,5 +208,12 @@ terraform apply
 ```console
 ssh ubuntu@APP_SRV_PUB_DNS_HOSTNAME
 ```
+
+<br>
+
+>
+>**Tip:** To remove created resources, use `terraform destroy` command.
+>
+>**Warning:** Be careful while using the `terraform destroy` command since it destroys all infrastructure created.
 
 ## Resources
