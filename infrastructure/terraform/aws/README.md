@@ -3,13 +3,15 @@
 This document:
 
 - Provides basic information about Terraform
-- Explains the details of the Terraform modules created to build the environment
+- Explains the Terraform modules created to build the environment
 - Provides environment requirements information
 - Guidelines to perform environment setup
 
 ## Table of Contents
 
-- [What is Terraform?](#what-is-terraform)
+- [The Project's Environment Provisioner: Terraform](#the-projects-environment-provisioner-terraform)
+  - [What is Terraform?](#what-is-terraform)
+  - [Terraform Modules Created for The Project](#terraform-modules-created-for-the-project)
 - [Environment Requirements](#environment-requirements)
 - [Setup](#setup)
   - [AWS Configuration](#aws-configuration)
@@ -17,15 +19,21 @@ This document:
   - [Amazon EC2 and VPC Resource Setup](#amazon-ec2-and-vpc-resource-setup)
 - [Resources](#reosurces)
 
-## What is Terraform?
+## The Project's Environment Provisioner: Terraform
+
+### What is Terraform?
 
 **Terraform** is a tool that lets you define, create, change and version cloud and on-prem resources safely and efficiently. For more information, visit [terraform.io](https://www.terraform.io/).
+
+Terraform is used in this project to define the environment infrastructure as code, and create, change, version it.
+
+### Terraform Modules Created for The Project
 
 There are two Terraform modules to setup necessary environment, **s3** and **ec2**. *s3* module creates the Amazon S3 bucket which stores the *ec2* module's Terraform state, and the *ec2* module provisions the required VPC and EC2 resources.
 
 ## Environment Requirements
 
-In order to setup a healthy computing environment, 2 virtual machines (**Controller Server** and **Application Server**) are needed:
+In order to set up a healthy computing environment, 2 virtual machines (**Controller Server** and **Application Server**) are needed:
 
 **Table-1** *Controller Server Hardware Requirements*
 
@@ -181,16 +189,12 @@ terraform plan
 terraform apply
 ```
 
-8. Capture the public IP address of the application server created from the `terraform apply` command output and append the following entry to the `/etc/hosts` file to access the application server with the domain name `cybersift`:
-
-```
-APP_SERVER_PUBLIC_IP_ADDR cybersift
-```
+8. Save the public DNS hostname of the application server (value of the `instance_public_dns_hostname` variable) in the `terraform apply` command output to use it in the Ansible inventory file later for [*Software Infrastructure Setup*](../../ansible/README.md) process.
 
 9. If there is no error in the `terraform apply` output, the application server should be up and ready, and accessible via SSH without providing any password:
 
 ```console
-ssh ubuntu@cybersift
+ssh ubuntu@APP_SRV_PUB_DNS_HOSTNAME
 ```
 
 ## Resources
