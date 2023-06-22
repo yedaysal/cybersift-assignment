@@ -62,7 +62,7 @@ In order to set up a healthy computing environment, 2 virtual machines (**Contro
 | Operating System | Ubuntu |
 | OS Image (AMI) | Ubuntu Server 20.04 LTS or later |
 | Base Environment | Minimal Install |
-| [Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html) | Latest Stable core Version |
+| [Ansible](https://docs.ansible.com/ansible/2.9/installation_guide/intro_installation.html) | Latest Stable Version |
 | [Terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli) | Latest Stable Version |
 | [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) | Latest Stable Version |
 | [Python 3](https://www.python.org/downloads/) | Latest Stable Version |
