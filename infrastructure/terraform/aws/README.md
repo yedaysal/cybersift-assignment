@@ -90,7 +90,9 @@ Before proceeding to next section:
 
 ### AWS Configuration
 
-In order Terraform to create resources on AWS, an AWS configuration is required. Follow the steps below on the controller server to create an configuration:
+In order Terraform to create resources on AWS, an AWS configuration is required. Follow the steps below to create an configuration:
+
+**On a web browser:**
 
 1. Go to [AWS Management Console](https://aws.amazon.com/console/) and login.
 2. On the console go to **IAM** service.
@@ -100,9 +102,12 @@ In order Terraform to create resources on AWS, an AWS configuration is required.
 6. On the opening page, select **Command Line Interface (CLI)** option and click on **Next** button.
 7. Describe the purpose of the access key (optional) and click on **Create access key** button on the opening page.
 8. Save the **Access key** and **Secret access key** information to use in AWS CLI config.
-9. Run `mkdir ~/.aws` command to create AWS configuration directory in the current user's home directory, then cd into it.
-10. Execute `touch config credentials` command to create two files to put configuration and credentials (access key and secret access key) into.
-11. Open the `config` file with any text editor and put the following information into it:
+
+**On the controller server:**
+
+9. Run `mkdir ~/.aws` command to create AWS configuration directory in the current user's home directory.
+10. Execute `touch ~/.aws/config ~/.aws/credentials` command to create two files to put configuration and credentials (access key and secret access key) into.
+11. Open the `~/.aws/config` file with any text editor and put the following information into it:
 
 ```
 [profile USER_PROFILE_NAME]
@@ -110,7 +115,7 @@ region = eu-central-1
 output = json
 ```
 
-12. Open the `credentials` file with any text editor and put the following information into it:
+12. Open the `~/.aws/credentials` file with any text editor and put the following information into it:
 
 ```
 [USER_PROFILE_NAME]
@@ -120,18 +125,18 @@ aws_secret_access_key = SECRET_ACCESS_KEY
 
 ### Amazon S3 Bucket Setup
 
-To create an Amazon S3 bucket, follow the steps below on the controller server:
+To create an Amazon S3 bucket, follow the steps below on the **controller server**:
 
-1. Clone this repository with `git clone` command:
+1. Clone this repository with `git clone` command into the current user's home directory:
 
 ```console
-git clone https://github.com/yedaysal/cybersift.git
+cd ; git clone https://github.com/yedaysal/cybersift.git
 ```
 
 2. cd into the `cybersift/infrastructure/terraform/aws/s3`:
 
 ```console
-cd cybersift/infrastructure/terraform/aws/s3
+cd ~/cybersift/infrastructure/terraform/aws/s3
 ```
 
 3. Change the `profile` variable's value to the profile name defined in the [AWS Configuration](#aws-configuration) section in the `variables.tf` file.
@@ -160,12 +165,12 @@ If there is no error in the `terraform apply` output, that means the requested b
 
 ### Amazon EC2 and VPC Resource Setup
 
-To create the necessary network and virtualization infrastructure on Amazon EC2 and VPC services, follow the steps below on the controller server:
+To create the necessary network and virtualization infrastructure on Amazon EC2 and VPC services, follow the steps below on the **controller server**:
 
 1. cd into the `cybersift/infrastructure/terraform/aws/ec2` directory:
 
 ```console
-cd cybersift/infrastructure/terraform/aws/ec2
+cd ~/cybersift/infrastructure/terraform/aws/ec2
 ```
 
 2. Change the `profile` variable's value to the profile name defined in the [AWS Configuration](#aws-configuration) section in the `variables.tf` file.
