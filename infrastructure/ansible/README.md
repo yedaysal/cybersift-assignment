@@ -99,3 +99,22 @@ cd ~/cybersift/infrastructure/ansible
 ```console
 ansible-playbook install.yml
 ```
+
+If no error occurs during the `ansible-playbook` command execution, that states the software infrastructure is up and ready.
+
+> **Note**
+> `install.yml` playbook provides the execution of all plays in the `plays/` directory from one central point. Alternatively, the plays in the `plays/` directory can be run individually with `ansible-playbook` command regardless of the order of run.
+
+<br>
+
+After the installation 3 important WEB-GUIs become available:
+
+**Table-1** *WEB GUI Information*
+
+| Name | URL | Initial Username | Initial Password |
+| --- | --- | --- | --- |
+| Kibana UI | [http://APP_SRV_PUB_DNS_HOSTNAME:5601/](http://APP_SRV_PUB_DNS_HOSTNAME:5601/) | elastic | y56#ZRWP8yHsk?ew |
+| NiFi UI | [http://APP_SRV_PUB_DNS_HOSTNAME:8081/nifi](http://APP_SRV_PUB_DNS_HOSTNAME:8081/nifi) | - | - |
+| Grafana UI | [http://APP_SRV_PUB_DNS_HOSTNAME:3000/](http://APP_SRV_PUB_DNS_HOSTNAME:3000) | admin | ?dPxPzvV%@U6vcks |
+
+## Resources
