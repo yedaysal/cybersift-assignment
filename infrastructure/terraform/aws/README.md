@@ -167,6 +167,7 @@ If there is no error in the `terraform apply` output, that means the requested b
 
 > **Note**
 > To remove created resources, use `terraform destroy` command.
+
 > **Warning**
 > Be careful while using the `terraform destroy` command since it destroys all infrastructure created.
 
@@ -213,6 +214,7 @@ ssh ubuntu@APP_SRV_PUB_DNS_HOSTNAME
 
 > **Note**
 > To remove created resources, use `terraform destroy` command.
+
 > **Warning**
 > Be careful while using the `terraform destroy` command since it destroys all infrastructure created.
 
