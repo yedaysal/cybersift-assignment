@@ -119,6 +119,7 @@ After the installation 3 important WEB-GUIs become available:
 
 ## Resources
 
+- [deviantony/docker-elk](https://github.com/deviantony/docker-elk)
 - [Apache NiFi: From Syslog to Elasticsearch](https://blog.davidvassallo.me/2018/09/19/apache-nifi-from-syslog-to-elasticsearch/)
 - [Apache NiFi Overview](https://nifi.apache.org/docs.html)
 - [Relaying Syslog UDP Events with Apache NiFi](https://exceptionfactory.com/posts/2022/09/26/relaying-syslog-udp-events-with-apache-nifi/)
