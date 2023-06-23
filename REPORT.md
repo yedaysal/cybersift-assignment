@@ -1030,3 +1030,4 @@ The monitoring of the application server has been provided by Telegraf, InfluxDB
 
 ## Result
 
+As a result of the project, all objectives except "monitoring Nifi" objective have been achieved.
