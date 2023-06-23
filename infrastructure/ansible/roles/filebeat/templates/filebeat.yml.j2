@@ -12,10 +12,9 @@ filebeat.config.modules:
 output.file:
   path: "/tmp/filebeat"
   filename: filebeat
-  rotate_every_kb: 10
+  rotate_every_kb: 100
   number_of_files: 100
   permissions: 0600
-  #rotate_on_startup: true
 
 processors:
   - add_host_metadata:
