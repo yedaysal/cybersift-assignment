@@ -60,7 +60,7 @@ In order to set up a healthy computing environment, 2 virtual machines (**Contro
 | Item | Requirement |
 | --- | --- |
 | Operating System | Ubuntu |
-| OS Image (AMI) | Ubuntu Server 20.04 LTS or later |
+| OS Image | Ubuntu Server 20.04 LTS or later |
 | Base Environment | Minimal Install |
 | [Ansible](https://docs.ansible.com/ansible/2.9/installation_guide/intro_installation.html) | Latest Stable Version |
 | [Terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli) | Latest Stable Version |
@@ -82,8 +82,8 @@ In order to set up a healthy computing environment, 2 virtual machines (**Contro
 
 Before proceeding to next section:
 
-- Set up a controller server with the specifications in Table-1, and ensure that  all software listed in Table-3 are installed.
 - Make sure that the controller server has access to the Internet.
+- Set up a controller server with the specifications in Table-1, and ensure that  all software listed in Table-3 are installed.
 - On the controller node, create a passwordless ssh key pair.
 
 ## Setup
@@ -133,7 +133,7 @@ To create an Amazon S3 bucket, follow the steps below on the **controller server
 cd ; git clone https://github.com/yedaysal/cybersift.git
 ```
 
-2. cd into the `cybersift/infrastructure/terraform/aws/s3`:
+2. cd into the `~/cybersift/infrastructure/terraform/aws/s3`:
 
 ```console
 cd ~/cybersift/infrastructure/terraform/aws/s3
@@ -175,7 +175,7 @@ If there is no error in the `terraform apply` output, that means the requested b
 
 To create the necessary network and virtualization infrastructure on Amazon EC2 and VPC services, follow the steps below on the **controller server**:
 
-1. cd into the `cybersift/infrastructure/terraform/aws/ec2` directory:
+1. cd into the `~/cybersift/infrastructure/terraform/aws/ec2` directory:
 
 ```console
 cd ~/cybersift/infrastructure/terraform/aws/ec2
