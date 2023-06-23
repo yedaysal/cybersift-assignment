@@ -2,6 +2,39 @@
 
 ## Table of Contents
 
+- [Introduction](#introduction)
+  - [Purpose of The Project](#purpose-of-the-project)
+  - [Technology Stack](#technology-stack)
+    - [Amazon EC2](#amazon-ec2)
+    - [Amazon S3](#amazon-s3)
+    - [Amazon VPC](#amazon-vpc)
+    - [Ansible](#ansible)
+    - [Apache NiFi](#apache-nifi)
+    - [Docker Compose](#docker-compose)
+    - [Docker Engine](#docker-engine)
+    - [Elasticsearch](#elasticsearch)
+    - [Filebeat](#filebeat)
+    - [Grafana](#grafana)
+    - [InfluxDB](#influxdb)
+    - [Kibana](#kibana)
+    - [Telegraf](#telegraf)
+    - [Terraform](#terraform)
+- [Installation](#installation)
+  - [Controller Server Prerequisite Check and Configuration](#controller-server-prerequisite-check-and-configuration)
+  - [Application Server Installation and Prerequisite Check](#application-server-installation-and-prerequisite-check)
+  - [Application Server Software Infrastructure Installation](#application-server-software-infrastructure-installation)
+- [Building Nifi Pipelines](#building-nifi-pipelines)
+  - [Building Syslog Pipeline](#building-syslog-pipeline)
+    - [ListenSyslog Processor Configuration](#listensyslog-processor-configuration)
+    - [ConvertRecord Processor Configuration](#convertrecord-processor-configuration)
+    - [PutElasticsearchRecord Processor configuration](#putelasticsearchrecord-processor-configuration)
+  - [Building Filebeat Pipeline](#building-filebeat-pipeline)
+    - [GetFile Processor Configuration](#getfile-processor-configuration)
+    - [SplitText Processor Configuration](#splittext-processor-configuration)
+    - [PutElasticsearchRecord Processor Configuration](#putelasticsearchrecord-processor-configuration-1)
+- [Monitoring The Application Server](#monitoring-the-application-server)
+- [Result](#result)
+
 ## Introduction
 
 This report is intended to state the purpose of the project, give brief information about the technology stack that forms the infrastructure, show installation steps, and highlight the results.
@@ -1030,4 +1063,4 @@ The monitoring of the application server has been provided by Telegraf, InfluxDB
 
 ## Result
 
-As a result of the project, all objectives except "monitoring Nifi" objective have been achieved.
+As a result of the project, all objectives except "monitoring Nifi" objective have been achieved. During the assignment period I have improved my current skills as well as gained new skills.
