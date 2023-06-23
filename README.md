@@ -13,6 +13,7 @@ Repository that contains the code to setup the necessary environment and softwar
 - [Environment and Software Infrastructure Setup](#environment-and-software-infrastructure-setup)
   - [Environment Setup](#environment-setup)
   - [Software Infrastructure Setup](#software-infrastructure-setup)
+- [Assignment Report](#assignment-report)
 
 ## Introduction - The Project's Aim
 
@@ -69,3 +70,7 @@ It's already been mentioned about the components which bring up the software inf
 3. **Monitoring Stack**, which is the gatherer, storekeeper and visualizer of the collected metric data of the host operating system.
 
 For more information and to get started with setup process, follow [**this**](./infrastructure/ansible/README.md) link.
+
+## Assignment Report
+
+The assignment report, which highlights the work has done and the results obtained, can be accessed through [this](./REPORT.md) link.
