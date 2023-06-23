@@ -1061,6 +1061,8 @@ The monitoring of the application server has been provided by Telegraf, InfluxDB
 <br>
 
 
-## Result
+## Conclusion
 
-As a result of the project, all objectives except "monitoring Nifi" objective have been achieved. During the assignment period I have improved my current skills as well as gained new skills.
+Log Management and Analysis are the essential components for security, and has a crucial importance for cybersecurity. In today’s competitive world, organizations cannot afford one second of downtime or slow performance of their applications. Performance issues can damage a brand and in some cases translate into a direct revenue loss. This is where centralized log management and analytic solutions such as ELastic Stack, Apache NiFi, Telegraf, InfluxDB and Grafana come into the picture; allowing engineers to gain the visibility that they need and ensure apps are available and performant all times. Thanks to these solutions, IT departments have the ability to collect and ship logs from multiple data sources, to transform log messages into meaningful data for easier analysis, to store data for extended time periods to allow for monitoring, trend analysis, and security use cases, and to dissect the data by querying it and creating visualizations and dashboards on top of it.
+
+When I started this project my aim was to achieve all objectives. However, I completed them all except the "monitoring Nifi" objective. During the assignment period I have improved my current skills as well as gained new skills. I think the project is very open to development and I will continue working on it.
