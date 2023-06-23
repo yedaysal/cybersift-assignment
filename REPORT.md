@@ -729,14 +729,6 @@ After being connected to the NiFi UI, the following operations have been perform
 
 The ListenSyslog processor, which listens for Syslog messages being sent to a given port over TCP or UDP, has been added to the initial canvas and configured to listen on UDP port 10514 since the UDP port 514 is reserved for operating system. Also, rsyslog is configured to send logs to this port.
 
-![ListenSyslog](./resources/screenshots/ListenSyslog.png)
-
-<p align="center">
-  <strong>ListenSyslog</strong>
-</p>
-
-<br>
-
 ![ListenSyslog-Scheduling](./resources/screenshots/ListenSyslog-Scheduling.png)
 
 <p align="center">
@@ -770,14 +762,6 @@ After the configuration, the ListenSyslog processor has been started and the sys
 #### ConvertRecord Processor Configuration
 
 The ConvertRecord processor converts data from one format to another using configured Record Reader and Record Write Controller Services. It has been configured to convert incoming syslog messages to JSON format.
-
-![ListenSyslog-and-ConverRecord-Processors](./resources/screenshots/ListenSyslog-and-ConverRecord-Processors.png)
-
-<p align="center">
-  <strong>ListenSyslog-and-ConverRecord-Processors</strong>
-</p>
-
-<br>
 
 ![ConvertRecord-Scheduling](./resources/screenshots/ConvertRecord-Scheduling.png)
 
@@ -827,15 +811,7 @@ After starting the ConvertRecord processor, it has started to receive data from 
 
 #### PutElasticsearchRecord Processor Configuration
 
-As its name suggests, the PutElasticsearchRecord processor puts data to Elasticsearch. It has been used put JSON formatted data received from ConvertRecord processor to the projects Elasticsearch instane.
-
-![ListenSyslog-ConverRecord-PutElasticsearchRecord-Processors](./resources/screenshots/ListenSyslog-ConverRecord-PutElasticsearchRecord-Processors.png)
-
-<p align="center">
-  <strong>ListenSyslog, ConverRecord and PutElasticsearchRecord Processors</strong>
-</p>
-
-<br>
+As its name suggests, the PutElasticsearchRecord processor puts data to Elasticsearch. It has been used put JSON formatted data received from ConvertRecord processor to the projects Elasticsearch instance.
 
 ![PutElasticsearchRecord-Scheduling](./resources/screenshots/PutElasticsearchRecord-Scheduling.png)
 
@@ -918,3 +894,139 @@ After configuring and starting the PutElasticsearchRecord pipeline, the building
 </p>
 
 ### Building Filebeat Pipeline
+
+Since the `/var/log/messages` file has been replaced with the `/var/log/syslog` file, the filebeat agent on the application server is configured to collect logs from the `/var/log/syslog` and write the output to `/tmp/filebeat` directory. NiFi will be configured to read the files in the `/tmp/filebeat` directory, split filebeat json output files into single json objects, and send data to Elasticsearch.
+
+#### GetFile Processor Configuration
+
+The GetFile processor creates FlowFiles from files in a directory, which have at least read permissions. This processor has been used to read the filebeat output files under the `/tmp/filebeat` directory and create FlowFiles from them.
+
+![GetFile-Scheduling](./resources/screenshots/GetFile-Scheduling.png)
+
+<p align="center">
+  <strong>GetFile Scheduling</strong>
+</p>
+
+<br>
+
+![GetFile-Properties](./resources/screenshots/GetFile-Properties.png)
+
+<p align="center">
+  <strong>GetFile Properties</strong>
+</p>
+
+<br>
+
+![GetFile-Relationships](./resources/screenshots/GetFile-Relationships.png)
+
+<p align="center">
+  <strong>GetFile Relationships</strong>
+</p>
+
+<br>
+
+After the configuration of the GetFile processor, it has been started and the data has started flowing into NiFi:
+
+![GetFile-Started](./resources/screenshots/GetFile-Started.png)
+
+<p align="center">
+  <strong>GetFile Started</strong>
+</p>
+
+<br>
+
+#### SplitText Processor Configuration
+
+The SplitText processor splits a text file into multiple smaller text files on line boundaries limited by maximum number of lines or total size of fragment. Each output split file will contain no more than the configured number of lines or bytes. It will be used to split filebeat output json files containing multiple json objects into files that contain single json objects.
+
+![SplitText-Scheduling](./resources/screenshots/SplitText-Scheduling.png)
+
+<p align="center">
+  <strong>SplitText Scheduling</strong>
+</p>
+
+<br>
+
+![SplitText-Properties](./resources/screenshots/SplitText-Properties.png)
+
+<p align="center">
+  <strong>SplitText Properties</strong>
+</p>
+
+<br>
+
+![SplitText-Relationships](./resources/screenshots/SplitText-Relationships.png)
+
+<p align="center">
+  <strong>SplitText Relationships</strong>
+</p>
+
+<br>
+
+After configuring the SplitText processor, it has been connected to the GetFile processor with success relationship and started:
+
+![SplitText-Started](./resources/screenshots/SplitText-Started.png)
+
+<p align="center">
+  <strong>SplitText Started</strong>
+</p>
+
+<br>
+
+#### PutElasticsearchRecord Processor Configuration
+
+A new PutElasticsearchRecord processor has been configured as in the [*Building Syslog Pipeline*](#building-syslog-pipeline) section to send single json objects to the Elasticsearch instance.
+
+After the PutElasticsearchRecord processor has configured, it has been connected to the SplitText processor with splits relationship to only receive split objects and started:
+
+![Filebeat-PutElasticsearchRecord-Started](./resources/screenshots/Filebeat-PutElasticsearchRecord-Started.png)
+
+<p align="center">
+  <strong>PutElasticsearchRecord Processor for Filebeat Pipeline Started</strong>
+</p>
+
+<br>
+
+After configuring and starting the PutElasticsearchRecord pipeline, the building simple filebeat pipeline objective has been successfully completed. The data has been sent to Elasticsearch viewed on Kibana:
+
+![es-filebeat-nifi-index](./resources/screenshots/es-filebeat-nifi-index.png)
+
+<p align="center">
+  <strong>Elasticsearch filebeat-nifi index on Kibana</strong>
+</p>
+
+<br>
+
+![filebeat-nifi-dataview](./resources/screenshots/filebeat-nifi-dataview.png)
+
+<p align="center">
+  <strong>Kibana filebeat-nifi data view</strong>
+</p>
+
+## Monitoring The Application Server
+
+The monitoring of the application server has been provided by Telegraf, InfluxDB and Grafana tools. Ansible *docker_monitoring* role creates an containerized monitoring stack which consists of InfluxDB and Grafana, and then the *telegraf* role installs an telegraf agent to the application server and starts collecting metrics. All configuration and installation operations are performed by Ansible, without any manual intervention:
+
+- Telegraf agent is installed and configured by Ansible to send logs to InfluxDB container.
+- InfluxDB container is installed and configured to store metrics received from Telegraf.
+- Grafana container is installed and configured to create an InfluxDB datasource and dashboard to show collected system metrics.
+
+![grafana-influxdb-ds](./resources/screenshots/grafana-influxdb-ds.png)
+
+<p align="center">
+  <strong>Grafana InfluxDB Datasource Created by Ansible</strong>
+</p>
+
+<br>
+
+![grafana-syst-metrics-db](./resources/screenshots/grafana-syst-metrics-db.png)
+
+<p align="center">
+  <strong>Grafana Telegraf - System Metrics Dashboard Created by Ansible</strong>
+</p>
+
+<br>
+
+
+## Result
+
