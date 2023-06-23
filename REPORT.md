@@ -371,4 +371,550 @@ python3/focal,now 3.8.2-0ubuntu2 amd64 [installed,automatic]
 
 <br>
 
-After this point, the controller server has become ready for software infrastructure setup.
+After this point, the controller server has become ready for software infrastructure setup on the application server.
+
+### Application Server Software Infrastructure Installation
+
+To install the application stacks on the application server the following actions have been performed on the controller server:
+
+The `~/cybersift/infrastructure/ansible` directory has been entered.
+
+```console
+cybersift@controller:~/cybersift/infrastructure/terraform/aws/ec2$ cd ~/cybersift/infrastructure/ansible
+cybersift@controller:~/cybersift/infrastructure/ansible$
+```
+
+A directory named `gitignore` has been created.
+
+```console
+cybersift@controller:~/cybersift/infrastructure/ansible$ mkdir gitignore
+```
+
+The Ansible Vault password file `VAULT_PASS` has been created in the `gitignore` directory and the initial password `y4*7nLXb!2z&^Vd9` has been added to it.
+
+```console
+cybersift@controller:~/cybersift/infrastructure/ansible$ echo 'y4*7nLXb!2z&^Vd9' > gitignore/VAULT_PASS
+```
+
+The `APP_SRV_PUB_DNS_HOSTNAME` entry in the `inventory.ini` file has been changed to the application server's public DNS hostname `ubuntu@ec2-3-124-45-204.eu-central-1.compute.amazonaws.com`.
+
+```console
+cybersift@controller:~/cybersift/infrastructure/ansible$ cat inventory.ini
+# Hosts to run the docker role on
+[docker]
+ec2-3-124-45-204.eu-central-1.compute.amazonaws.com
+
+# Hosts to run the docker_elastic role on
+[docker_elastic]
+ec2-3-124-45-204.eu-central-1.compute.amazonaws.com
+
+# Hosts to run the docker_monitoring role on
+[docker_monitoring]
+ec2-3-124-45-204.eu-central-1.compute.amazonaws.com
+
+# Hosts to run the docker_nifi role on
+[docker_nifi]
+ec2-3-124-45-204.eu-central-1.compute.amazonaws.com
+
+# Hosts to run the filebeat role on
+[filebeat]
+ec2-3-124-45-204.eu-central-1.compute.amazonaws.com
+
+# Hosts to run the telegraf role on
+[telegraf]
+ec2-3-124-45-204.eu-central-1.compute.amazonaws.com
+```
+
+It has been validated that all the hosts (currently only the application server) in the `inventory.ini` file are accessible and manageable by Ansible.
+
+```console
+cybersift@controller:~/cybersift/infrastructure/ansible$ ansible all -m ping
+ec2-3-124-45-204.eu-central-1.compute.amazonaws.com | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+```
+
+It has been made sure that the working directory is `~/cybersift/infrastructure/ansible`.
+
+```console
+cybersift@controller:~/cybersift/infrastructure/ansible$ pwd
+/home/cybersift/cybersift/infrastructure/ansible
+```
+
+The `ansible-playbook install.yml` command has been executed to start installation process.
+
+```console
+cybersift@controller:~/cybersift/infrastructure/ansible$ ansible-playbook install.yml
+
+PLAY [Ensure docker_elastic role is installed] *****************************************************************
+
+TASK [Gathering Facts] *****************************************************************************************
+ok: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+TASK [docker : Ensure apt package index is updated] ************************************************************
+changed: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+TASK [docker : Ensure required packages for apt are installed] *************************************************
+ok: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+TASK [docker : Ensure python3-pip is installed] ****************************************************************
+changed: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+TASK [docker : Ensure python docker and docker-compose modules are installed] **********************************
+changed: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+TASK [docker : Ensure official Docker GPG key is added] ********************************************************
+changed: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+TASK [docker : Print Docker apt repository entry] **************************************************************
+changed: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+TASK [docker : Ensure Docker apt repo is configured] ***********************************************************
+changed: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+TASK [docker : Ensure docker and docker-compose are installed] *************************************************
+changed: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+TASK [docker : Ensure user ubuntu is added to docker group] ****************************************************
+changed: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+TASK [docker : Ensure docker_elastic network is created] *******************************************************
+changed: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+TASK [docker_elastic : Ensure stack directory (docker-elk) exists] *********************************************
+changed: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+TASK [docker_elastic : Ensure stack compose file exists] *******************************************************
+changed: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+TASK [docker_elastic : Ensure stack compose env file exists] ***************************************************
+changed: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+TASK [docker_elastic : Ensure docker-elk/setup/entrypoint.sh file is executable] *******************************
+changed: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+TASK [docker_elastic : Ensure the stack is up] *****************************************************************
+changed: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+TASK [docker_elastic : Ensure Kibana UI (http://ec2-3-124-45-204.eu-central-1.compute.amazonaws.com:5601/) is available] ***
+FAILED - RETRYING: Ensure Kibana UI (http://ec2-3-124-45-204.eu-central-1.compute.amazonaws.com:5601/) is available (12 retries left).
+FAILED - RETRYING: Ensure Kibana UI (http://ec2-3-124-45-204.eu-central-1.compute.amazonaws.com:5601/) is available (11 retries left).
+FAILED - RETRYING: Ensure Kibana UI (http://ec2-3-124-45-204.eu-central-1.compute.amazonaws.com:5601/) is available (10 retries left).
+ok: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+PLAY [Ensure docker_nifi role is installed] ********************************************************************
+
+TASK [Gathering Facts] *****************************************************************************************
+ok: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+TASK [docker : Ensure apt package index is updated] ************************************************************
+changed: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+TASK [docker : Ensure required packages for apt are installed] *************************************************
+ok: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+TASK [docker : Ensure python3-pip is installed] ****************************************************************
+ok: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+TASK [docker : Ensure python docker and docker-compose modules are installed] **********************************
+ok: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+TASK [docker : Ensure official Docker GPG key is added] ********************************************************
+changed: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+TASK [docker : Print Docker apt repository entry] **************************************************************
+changed: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+TASK [docker : Ensure Docker apt repo is configured] ***********************************************************
+ok: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+TASK [docker : Ensure docker and docker-compose are installed] *************************************************
+ok: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+TASK [docker : Ensure user ubuntu is added to docker group] ****************************************************
+ok: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+TASK [docker : Ensure docker_elastic network is created] *******************************************************
+ok: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+TASK [docker_nifi : Ensure /opt/cybersift/docker_nifi directory exists] ****************************************
+changed: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+TASK [docker_nifi : Ensure stack compose file exists] **********************************************************
+changed: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+TASK [docker_nifi : Ensure the stack is up] ********************************************************************
+changed: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+TASK [docker_nifi : Ensure NiFi UI (http://ec2-3-124-45-204.eu-central-1.compute.amazonaws.com:8081/nifi) is available] ***
+FAILED - RETRYING: Ensure NiFi UI (http://ec2-3-124-45-204.eu-central-1.compute.amazonaws.com:8081/nifi) is available (24 retries left).
+FAILED - RETRYING: Ensure NiFi UI (http://ec2-3-124-45-204.eu-central-1.compute.amazonaws.com:8081/nifi) is available (23 retries left).
+FAILED - RETRYING: Ensure NiFi UI (http://ec2-3-124-45-204.eu-central-1.compute.amazonaws.com:8081/nifi) is available (22 retries left).
+FAILED - RETRYING: Ensure NiFi UI (http://ec2-3-124-45-204.eu-central-1.compute.amazonaws.com:8081/nifi) is available (21 retries left).
+FAILED - RETRYING: Ensure NiFi UI (http://ec2-3-124-45-204.eu-central-1.compute.amazonaws.com:8081/nifi) is available (20 retries left).
+FAILED - RETRYING: Ensure NiFi UI (http://ec2-3-124-45-204.eu-central-1.compute.amazonaws.com:8081/nifi) is available (19 retries left).
+FAILED - RETRYING: Ensure NiFi UI (http://ec2-3-124-45-204.eu-central-1.compute.amazonaws.com:8081/nifi) is available (18 retries left).
+FAILED - RETRYING: Ensure NiFi UI (http://ec2-3-124-45-204.eu-central-1.compute.amazonaws.com:8081/nifi) is available (17 retries left).
+FAILED - RETRYING: Ensure NiFi UI (http://ec2-3-124-45-204.eu-central-1.compute.amazonaws.com:8081/nifi) is available (16 retries left).
+ok: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+TASK [docker_nifi : Ensure rsyslog is configured to send logs to NiFi] *****************************************
+changed: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+RUNNING HANDLER [docker_nifi : Restart rsyslog.service] ********************************************************
+changed: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+PLAY [Ensure filebeat role is installed] ***********************************************************************
+
+TASK [Gathering Facts] *****************************************************************************************
+ok: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+TASK [filebeat : Ensure elastic.co apt key is present] *********************************************************
+changed: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+TASK [filebeat : Ensure elastic.co filebeat repository is configured] ******************************************
+changed: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+TASK [filebeat : Ensure filebeat package is installed] *********************************************************
+changed: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+TASK [filebeat : Ensure filebeat.yml is present] ***************************************************************
+changed: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+TASK [filebeat : Ensure filebeat service is enabled and started] ***********************************************
+changed: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+TASK [filebeat : Ensure filebeat output directory exists and is accessible] ************************************
+changed: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+TASK [filebeat : Ensure "* * * * * chmod 604 /tmp/filebeat/*" cron entry is present] ***************************
+changed: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+RUNNING HANDLER [filebeat : Restart filebeat.service] **********************************************************
+changed: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+PLAY [Ensure docker_monitoring role is installed] **************************************************************
+
+TASK [Gathering Facts] *****************************************************************************************
+ok: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+TASK [docker : Ensure apt package index is updated] ************************************************************
+changed: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+TASK [docker : Ensure required packages for apt are installed] *************************************************
+ok: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+TASK [docker : Ensure python3-pip is installed] ****************************************************************
+ok: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+TASK [docker : Ensure python docker and docker-compose modules are installed] **********************************
+ok: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+TASK [docker : Ensure official Docker GPG key is added] ********************************************************
+changed: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+TASK [docker : Print Docker apt repository entry] **************************************************************
+changed: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+TASK [docker : Ensure Docker apt repo is configured] ***********************************************************
+ok: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+TASK [docker : Ensure docker and docker-compose are installed] *************************************************
+ok: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+TASK [docker : Ensure user ubuntu is added to docker group] ****************************************************
+ok: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+TASK [docker : Ensure docker_elastic network is created] *******************************************************
+ok: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+TASK [docker_monitoring : Ensure /opt/cybersift/docker_monitoring directory exists] ****************************
+changed: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+TASK [docker_monitoring : Ensure stack compose file exists] ****************************************************
+changed: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+TASK [docker_monitoring : Ensure the stack is up] **************************************************************
+changed: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+TASK [docker_monitoring : Ensure Grafana UI (http://ec2-3-124-45-204.eu-central-1.compute.amazonaws.com:3000/) is available] ***
+FAILED - RETRYING: Ensure Grafana UI (http://ec2-3-124-45-204.eu-central-1.compute.amazonaws.com:3000/) is available (12 retries left).
+ok: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+TASK [docker_monitoring : Ensure Grafana admin user password is changed] ***************************************
+ok: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+TASK [docker_monitoring : Check if Grafana InfluxDB datasource exists] *****************************************
+ok: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+TASK [docker_monitoring : Ensure Grafana InfluxDB datasource is added] *****************************************
+ok: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+TASK [docker_monitoring : Ensure 'Telegraf - system metrics' dashboard exists] *********************************
+ok: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+PLAY [Ensure telegraf role is installed] ***********************************************************************
+
+TASK [Gathering Facts] *****************************************************************************************
+ok: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+TASK [telegraf : Ensure Telegraf repository is installed] ******************************************************
+[WARNING]: Consider using the get_url or uri module rather than running 'wget'.  If you need to use command
+because get_url or uri is insufficient you can add 'warn: false' to this command task or set
+'command_warnings=False' in ansible.cfg to get rid of this message.
+changed: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+TASK [telegraf : Ensure apt cache is updated] ******************************************************************
+changed: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+TASK [telegraf : Ensure Telegraf is installed] *****************************************************************
+changed: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+TASK [telegraf : Ensure telegraf.conf exists] ******************************************************************
+changed: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+TASK [telegraf : Ensure Telegraf service is enabled and started] ***********************************************
+changed: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+RUNNING HANDLER [telegraf : Restart telegraf] ******************************************************************
+changed: [ec2-3-124-45-204.eu-central-1.compute.amazonaws.com]
+
+PLAY RECAP *****************************************************************************************************
+ec2-3-124-45-204.eu-central-1.compute.amazonaws.com : ok=69   changed=42   unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+
+
+```
+
+<br>
+
+After the `ansible-playbook` command execution, the software infrastructure setup has been completed successfully and the Kibana, NiFi and Grafana UIs have been become accessible via URLs below:
+
+- Kibana UI: [http://ec2-3-124-45-204.eu-central-1.compute.amazonaws.com:5601/](http://ec2-3-124-45-204.eu-central-1.compute.amazonaws.com:5601/)
+
+![kibana-ui](./resources/screenshots/kibana-ui.png)
+
+<p align="center">
+  <strong>Kibana UI</strong>
+</p>
+
+- NiFi UI: [http://ec2-3-124-45-204.eu-central-1.compute.amazonaws.com:8081/nifi](http://ec2-3-124-45-204.eu-central-1.compute.amazonaws.com:8081/nifi)
+
+![nifi-ui](./resources/screenshots/nifi-ui.png)
+
+<p align="center">
+  <strong>NiFi UI</strong>
+</p>
+
+- Grafana UI: [http://ec2-3-124-45-204.eu-central-1.compute.amazonaws.com:3000/](http://ec2-3-124-45-204.eu-central-1.compute.amazonaws.com:3000/)
+
+![grafana-ui](./resources/screenshots/grafana-ui.png)
+
+<p align="center">
+  <strong>Grafana UI</strong>
+</p>
+
+## Building Nifi Pipelines
+
+NiFi represents the data moving through the system as **FlowFile**. FlowFiles are processed in NiFi units called FlowFile Processor. NiFi pipelines are the combination of FlowFile Processors and can be used to perform a certain task, for example, collecting syslog messages, transforming and sending them to Elasticsearch. Two simple NiFi pipelines have been created in this section:
+
+### Building Syslog Pipeline
+
+After being connected to the NiFi UI, the following operations have been performed to build a simple syslog pipeline:
+
+#### ListenSyslog Processor Configuration
+
+The ListenSyslog processor, which listens for Syslog messages being sent to a given port over TCP or UDP, has been added to the initial canvas and configured to listen on UDP port 10514 since the UDP port 514 is reserved for operating system. Also, rsyslog is configured to send logs to this port.
+
+![ListenSyslog](./resources/screenshots/ListenSyslog.png)
+
+<p align="center">
+  <strong>ListenSyslog</strong>
+</p>
+
+<br>
+
+![ListenSyslog-Scheduling](./resources/screenshots/ListenSyslog-Scheduling.png)
+
+<p align="center">
+  <strong>ListenSyslog Scheduling</strong>
+</p>
+
+<br>
+
+![ListenSyslog-Properties](./resources/screenshots/ListenSyslog-Properties.png)
+
+<p align="center">
+  <strong>ListenSyslog Properties</strong>
+</p>
+
+<br>
+
+![ListenSyslog-Relationships](./resources/screenshots/ListenSyslog-Relationships.png)
+
+<p align="center">
+  <strong>ListenSyslog Relationships</strong>
+</p>
+
+After the configuration, the ListenSyslog processor has been started and the syslog data has been started flowing:
+
+![ListenSyslog-Started](./resources/screenshots/ListenSyslog-Started.png)
+
+<p align="center">
+  <strong>ListenSyslog Started</strong>
+</p>
+
+#### ConvertRecord Processor Configuration
+
+The ConvertRecord processor converts data from one format to another using configured Record Reader and Record Write Controller Services. It has been configured to convert incoming syslog messages to JSON format.
+
+![ListenSyslog-and-ConverRecord-Processors](./resources/screenshots/ListenSyslog-and-ConverRecord-Processors.png)
+
+<p align="center">
+  <strong>ListenSyslog-and-ConverRecord-Processors</strong>
+</p>
+
+<br>
+
+![ConvertRecord-Scheduling](./resources/screenshots/ConvertRecord-Scheduling.png)
+
+<p align="center">
+  <strong>ConvertRecord Scheduling</strong>
+</p>
+
+<br>
+
+For ConvertRecord processor to be able to read syslog messages and write them in JSON format, SyslogReader Record Reader service and JsonRecordSetWriter Record Writer service have been created and enabled with default settings, and configured for ConvertRecord processor:
+
+![ConvertRecord-Properties](./resources/screenshots/ConvertRecord-Properties.png)
+
+<p align="center">
+  <strong>ConvertRecord Properties</strong>
+</p>
+
+<br>
+
+<br>
+
+![SyslogReader-and-JsonRecordSetWriter-services](./resources/screenshots/SyslogReader-and-JsonRecordSetWriter-services.png)
+
+<p align="center">
+  <strong>SyslogReader and JsonRecordSetWriter Services</strong>
+</p>
+
+<br>
+
+![ConvertRecord-Relationships](./resources/screenshots/ConvertRecord-Relationships.png)
+
+<p align="center">
+  <strong>ConvertRecord Relationships</strong>
+</p>
+
+After configuring the ConvertRecord processor, it has been connected to the ListenSyslog processor with success relationship and started:
+
+![ConvertRecord-Started](./resources/screenshots/ConvertRecord-Started.png)
+
+<p align="center">
+  <strong>ConvertRecord Started</strong>
+</p>
+
+<br>
+
+After starting the ConvertRecord processor, it has started to receive data from ListenSyslog processor.
+
+#### PutElasticsearchRecord Processor Configuration
+
+As its name suggests, the PutElasticsearchRecord processor puts data to Elasticsearch. It has been used put JSON formatted data received from ConvertRecord processor to the projects Elasticsearch instane.
+
+![ListenSyslog-ConverRecord-PutElasticsearchRecord-Processors](./resources/screenshots/ListenSyslog-ConverRecord-PutElasticsearchRecord-Processors.png)
+
+<p align="center">
+  <strong>ListenSyslog, ConverRecord and PutElasticsearchRecord Processors</strong>
+</p>
+
+<br>
+
+![PutElasticsearchRecord-Scheduling](./resources/screenshots/PutElasticsearchRecord-Scheduling.png)
+
+<p align="center">
+  <strong>PutElasticsearchRecord Scheduling</strong>
+</p>
+
+<br>
+
+For PutElasticsearchRecord processor to be able to read JSON data received from ConvertRecord processor, write the data and connect to an Elasticsearch instance:
+
+- A JsonTreeReader service created and enabled with default settings for the PutElasticsearchRecord processor.
+- An ElasticSearchClientServiceImpl service created and enabled with the following settings for the PutElasticsearchRecord processor.
+- The previously created JsonRecordSetWriter service is configured for the PutElasticsearchRecord processor.
+
+![ElasticSearchClientServiceImpl-Properties](./resources/screenshots/ElasticSearchClientServiceImpl-Properties.png)
+
+<p align="center">
+  <strong>ElasticSearchClientServiceImpl Properties</strong>
+</p>
+
+<br>
+
+![Controller-Services](./resources/screenshots/Controller-Services.png)
+
+<p align="center">
+  <strong>Added JsonTreeReader and ElasticSearchClientServiceImpl Services</strong>
+</p>
+
+<br>
+
+![PutElasticsearchRecord-Properties1](./resources/screenshots/PutElasticsearchRecord-Properties1.png)
+
+<p align="center">
+  <strong>PutElasticsearchRecord Properties 1</strong>
+</p>
+
+<br>
+
+![PutElasticsearchRecord-Properties2](./resources/screenshots/PutElasticsearchRecord-Properties2.png)
+
+<p align="center">
+  <strong>PutElasticsearchRecord Properties 2</strong>
+</p>
+
+<br>
+
+![PutElasticsearchRecord-Relationships](./resources/screenshots/PutElasticsearchRecord-Relationships.png)
+
+<p align="center">
+  <strong>PutElasticsearchRecord Relationships</strong>
+</p>
+
+<br>
+
+After configuring the PutElasticsearch processor, it has been connected to the ConvertRecord processor with success and retry relationships and started:
+
+![PutElasticsearchRecord-Started](./resources/screenshots/PutElasticsearchRecord-Started.png)
+
+<p align="center">
+  <strong>PutElasticsearchRecord Started</strong>
+</p>
+
+<br>
+
+After configuring and starting the PutElasticsearchRecord pipeline, the building simple syslog pipeline objective has been successfully completed. The data has been sent to Elasticsearch viewed on Kibana:
+
+![es-syslog-nifi-index](./resources/screenshots/es-syslog-nifi-index.png)
+
+<p align="center">
+  <strong>Elasticsearch syslog-nifi index on Kibana</strong>
+</p>
+
+<br>
+
+![syslog-nifi-dataview](./resources/screenshots/syslog-nifi-dataview.png)
+
+<p align="center">
+  <strong>Kibana syslog-nifi data view</strong>
+</p>
+
+### Building Filebeat Pipeline
