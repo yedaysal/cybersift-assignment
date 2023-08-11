@@ -130,13 +130,13 @@ To create an Amazon S3 bucket, follow the steps below on the **controller server
 1. Clone this repository with `git clone` command into the current user's home directory:
 
 ```console
-cd ; git clone https://github.com/yedaysal/cybersift.git
+cd ; git clone https://github.com/yedaysal/cybersift-assignment.git
 ```
 
-2. cd into the `~/cybersift/infrastructure/terraform/aws/s3`:
+2. cd into the `~/cybersift-assignment/infrastructure/terraform/aws/s3`:
 
 ```console
-cd ~/cybersift/infrastructure/terraform/aws/s3
+cd ~/cybersift-assignment/infrastructure/terraform/aws/s3
 ```
 
 3. Change the `profile` variable's value to the profile name defined in the [AWS Configuration](#aws-configuration) section in the `variables.tf` file.
@@ -175,10 +175,10 @@ If there is no error in the `terraform apply` output, that means the requested b
 
 To create the necessary network and virtualization infrastructure on Amazon EC2 and VPC services, follow the steps below on the **controller server**:
 
-1. cd into the `~/cybersift/infrastructure/terraform/aws/ec2` directory:
+1. cd into the `~/cybersift-assignment/infrastructure/terraform/aws/ec2` directory:
 
 ```console
-cd ~/cybersift/infrastructure/terraform/aws/ec2
+cd ~/cybersift-assignment/infrastructure/terraform/aws/ec2
 ```
 
 2. Change the `profile` variable's value to the profile name defined in the [AWS Configuration](#aws-configuration) section in the `variables.tf` file.
