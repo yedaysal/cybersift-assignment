@@ -51,10 +51,10 @@ For a successfully deployed and healthy software infrastructure, the following p
 
 Before running playbooks and beginning software infrastructure setup, an initial configuration for Ansible is required on the **controller server**:
 
-1. cd into the `~/cybersift/infrastructure/ansible` directory:
+1. cd into the `~/cybersift-assignment/infrastructure/ansible` directory:
 
 ```console
-cd ~/cybersift/infrastructure/ansible
+cd ~/cybersift-assignment/infrastructure/ansible
 ```
 
 2. Create a directory named `gitignore` to put the Ansible Vault password file `VAULT_PASS` into:
@@ -88,10 +88,10 @@ If the command output contains `SUCCESS` keyword, the software infrastructure is
 
 To begin the installation process, follow the steps below on the **controller server** :
 
-1. Make sure the working directory is `~/cybersift/infrastructure/ansible`:
+1. Make sure the working directory is `~/cybersift-assignment/infrastructure/ansible`:
 
 ```console
-cd ~/cybersift/infrastructure/ansible
+cd ~/cybersift-assignment/infrastructure/ansible
 ```
 
 2. Run the `ansible-playbook` command:
